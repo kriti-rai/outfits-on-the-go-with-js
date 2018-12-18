@@ -1,0 +1,9 @@
+<h1>Tagged #<%= params[:hashtag] %></h1>
+
+<% if @outfits %>
+  <% @outfits.each do |outfit| %>
+    <%= render partial: "outfits/outfit", locals: {outfit: outfit} %>
+  <% end %>
+<% else %>
+  <p>There is no match for #<em><%= params[:hashtag] %></em> tag</p>
+<% end %>

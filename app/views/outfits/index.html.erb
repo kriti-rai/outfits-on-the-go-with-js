@@ -1,0 +1,8 @@
+<% if !@board.outfits.empty? %>
+    <% @board.outfits.each do |outfit| %>
+      <p><%=link_to image_tag(outfit.image.url), outfit, class: 'outfit-thumbnail' %></p>
+      <p><font color='grey'><em><%= outfit.caption %></em></font></p>
+    <% end %>
+<% end %>
+<br>
+<p><%= link_to "Go Back", @board %></p>

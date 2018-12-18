@@ -1,0 +1,18 @@
+<% if !@boards.empty? %>
+  <% if check_user %>
+    <h5> Currently, you have <%=pluralize(@boards.size, 'board')%>! | <%= link_to "Create a Board", new_user_board_path(@user) %></h5>
+  <% else %>
+    <h5> Currently, <%= @user.username %> has <%=pluralize(@boards.size, 'board')%>!</h5>
+    <br>
+  <%end %>
+    <% @boards.each do |board| %>
+        <p><%= link_to board.name, board %></p>
+    <% end %>
+<% else %>
+  <% if check_user %>
+    <h5> Currently, you don't have any board! | <%= link_to "Create a Board", new_user_board_path(@user) %></h5>
+  <% else %>
+    <h5> Currently, <%= @user.username %> doesn't have any board!</h5>
+  <% end %>
+  <br>
+<%end %>

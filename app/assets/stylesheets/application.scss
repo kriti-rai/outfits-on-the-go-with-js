@@ -1,0 +1,82 @@
+
+@import "bootstrap";
+
+img.user-show {
+  width: 200px;
+  height: auto;
+  border-radius: 50%;
+}
+
+a.user-show img {
+  width: 150px;
+  height: auto;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+a.outfit-thumbnail img {
+  width: 350px;
+  height: auto;
+}
+img.outfit-show {
+  width: 500px;
+  height: auto;
+}
+
+h1 {
+  color: #4682b4;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+.button {
+    background-color: #87ceeb;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.login-form{
+    max-width: 500px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    margin: 10px auto;
+    padding: 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+.login-form fieldset{
+    border: none;
+}
+.login-form legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+}
+.login-form input[type="text"], .login-form input[type="password"]  {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background: rgba(255,255,255,.1);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 0;
+    outline: 0;
+    padding: 7px;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    background-color: #e8eeef;
+    color:#8a97a0;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    margin-bottom: 30px;
+
+}

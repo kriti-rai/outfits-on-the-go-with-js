@@ -1,0 +1,10 @@
+<em><h5><%= @outfit.caption %></h5></em>
+<br>
+<%= render partial: "outfit", locals: {outfit: @outfit} %>
+<br>
+<br>
+<p><%= link_to "Go Back", board_outfits_path(@outfit.board)%>
+  <% if outfit_owner %>
+    | <%= link_to "Edit", edit_outfit_path(@outfit) %> | <%= link_to "Delete", @outfit, method: :delete, data: {confirm: "Are you sure?"}%></p>
+  <% end %>
+</p>

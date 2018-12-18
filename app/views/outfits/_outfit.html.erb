@@ -1,0 +1,10 @@
+<div><%= image_tag outfit.image.url, {class: "outfit-show"}%></div>
+
+<br>
+<% if !outfit.tags.empty? %>
+  Tags: <% outfit.tags.each do |tag| %>
+    <%= render_tag_link(tag) %>
+    <% end %>
+<% end %>
+<br>
+<br>

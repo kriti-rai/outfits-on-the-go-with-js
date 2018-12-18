@@ -1,0 +1,13 @@
+<h1>Name: <%=@board.name%></h1>
+<h5>Created on: <%= @board.created_date %></h5>
+<h5><% if !@board.outfits.empty? %>
+    <%= link_to "See Outfits", board_outfits_path(@board)%>
+  <% else %>
+    There are no outfit listed on this board yet.
+<% end %>
+</h5>
+<br>
+<p><%= link_to "Go Back", @board.user %>
+<% if current_user == @board.user %>
+  | <%= link_to "Add an Outfit", new_board_outfit_path(@board, @outfit)%> | <%= link_to "Edit", edit_board_path(@board)%> | <%= link_to "Delete", @board, method: :delete, data: {confirm: "Are you sure?"} %></p>
+<% end %>

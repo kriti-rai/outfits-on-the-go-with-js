@@ -1,0 +1,8 @@
+<% @users.each do |user| %>
+  <% if user.image? %>
+    <%= link_to image_tag(user.image.url), user, class: "user-show" %>
+  <% else %>
+    <%= link_to image_tag(asset_path('no_image.png')), user, class: "user-show" %>
+  <% end %>
+  <div class="figcaption"><%= user.username %></div>
+<% end %>

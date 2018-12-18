@@ -1,0 +1,13 @@
+<%= form_for @user do |f| %>
+<div class="form-group">
+  <%=f.file_field :image, class: "btn btn-primary btn-lg" %>
+</div>
+<div class="login-form">
+  Username: <%=f.text_field :username %><br>
+  Email Address: <%=f.text_field :email_address %><br>
+  Password: <%=f.password_field :password %><br>
+  Bio: <%=f.text_field :bio %><br>
+  <%= f.submit class: "btn btn-primary btn-sm"%>
+<% end %>
+</div>
+<br>
