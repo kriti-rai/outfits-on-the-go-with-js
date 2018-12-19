@@ -1,8 +1,8 @@
 <% if @user.image? %>
-  <%= image_tag @user.image.url, {class: "user-show"}%>
+  <%= image_tag @user.image.url, {class: "user-show", id: "user-#{@user.id}"}%>
 <% else %>
-  <%= image_tag asset_path('no_image.png'), {class: "user-show"}%>
-<% end %>
+  <%= image_tag asset_path('no_image.png'), {class: "user-show", id: "@user-#{user.id}"}%>
+  <% end %>
 <br>
 <br>
 <h1><%=@user.username %>!</h1>
