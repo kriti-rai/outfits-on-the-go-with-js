@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
 
   def new
     if logged_in?
-      redirect_to feed_path
+      @user = current_user
+      redirect_to @user
     else
       render 'new'
     end
