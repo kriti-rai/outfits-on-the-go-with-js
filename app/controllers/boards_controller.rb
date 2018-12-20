@@ -41,6 +41,10 @@ class BoardsController < ApplicationController
   def show
     @user = @board.user
     @outfit = Outfit.new
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @board }
+    end
   end
 
   def index
