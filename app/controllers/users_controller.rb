@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    render :layout=>false
+    render json: @user
   end
 
   def index
