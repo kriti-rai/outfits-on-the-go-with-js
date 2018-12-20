@@ -1,0 +1,5 @@
+$(".users").empty()
+var html = "<%= j render(partial: 'show', locals: {user: @user}) %>"
+
+
+$(".users").append(html)
