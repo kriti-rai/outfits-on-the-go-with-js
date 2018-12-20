@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_login
   skip_before_action :require_login, only: [:new, :create]
-  before_action :set_user, only: [:edit, :update, :show, :destroy]
+  before_action :set_user, only: [:edit, :update, :show, :next, :destroy]
 
   def new
     @user = User.new
@@ -39,10 +39,22 @@ class UsersController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @user }
+    end
   end
 
   def index
     @users = User.sorted
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @users }
+    end
+  end
+
+  def next
+    #takes one to next user's show page
   end
 
   def destroy
