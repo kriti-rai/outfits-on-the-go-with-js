@@ -1,13 +1,11 @@
 <h1>Welcome!</h1>
 <br>
-<div class="login-form">
-  <%= form_tag(signin_path, method: "post") do %>
+<%= form_tag(signin_path, method: "post", class: "login-form") do %>
   Username: <%= text_field_tag :username %><br>
   Password: <%= password_field_tag :password %><br>
   <br>
   <%= submit_tag "Log In" , class: 'button'%>
 <% end %>
-</div>
 <br>
 <br>
 <p><%= link_to('Log in with Facebook!', '/auth/facebook') %></p>
