@@ -52,6 +52,8 @@ class UsersController < ApplicationController
 
   def next
     #takes one to next user's show page
+    @next = @user.next
+    render json: @next
   end
 
   def destroy
