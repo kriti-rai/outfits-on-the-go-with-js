@@ -19,7 +19,6 @@ function attachListenersForBoards() {
     //list outfits under that hashtag
     $('body').on('click', 'a.tags', function (e) {
       e.preventDefault();
-      debugger
       listTaggedOutfits(this);
      });
 
