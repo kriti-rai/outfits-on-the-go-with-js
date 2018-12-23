@@ -1,8 +1,8 @@
 $(document).on('turbolinks:load', function() {
-  attachListeners();
+  attachListenersForUsers();
 });
 
-function attachListeners() {
+function attachListenersForUsers() {
   //shows individual profile
   $('.user-show').on('click', function(e) {
     showUser(this);
@@ -28,18 +28,6 @@ function attachListeners() {
       });
     });
   });
-
-  //Boards button
-  $('body').on('click', '#boards', function (e) {
-    e.preventDefault();
-    $.get(this.value, function(boards) {
-      $('.users').empty();
-      $('.users').append('<h1>Boards</h1>')
-      boards.forEach(function(board) {
-        $('.users').append(`<h5><a href="/boards/${board.id}">${board.name}</a></h5>`)
-      });
-    });
-   });
 
    //Next User button
    $('body').on('click', '#nextUser', function (e) {
