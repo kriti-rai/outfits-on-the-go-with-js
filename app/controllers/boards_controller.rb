@@ -51,6 +51,7 @@ class BoardsController < ApplicationController
     @user = User.find_by(id: params[:user_id])
     if !@user.nil?
       @boards = @user.boards
+      render json: @boards
     else
       flash[:error] = "The user does not exist"
       redirect_to feed_path
