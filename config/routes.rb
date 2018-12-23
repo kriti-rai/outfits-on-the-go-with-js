@@ -19,10 +19,13 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'sessions#create'
   get 'auth/failure', to: redirect('/')
 
+  get '/users/:id/next', to: 'users#next'
+  
   resources :users do
     resources :boards , shallow: true do
       resources :outfits, shallow: true
     end
   end
+
 
 end
