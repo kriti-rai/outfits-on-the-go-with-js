@@ -21,7 +21,6 @@ function attachListenersForBoards() {
       e.preventDefault();
       listTaggedOutfits(this);
      });
-
 };
 
 var listBoards = (data) => {
@@ -41,15 +40,19 @@ var listOutfits = (data) => {
     if (outfits.length) {
       $('.users').append('<h1>Outfits</h1>')
       outfits.forEach(function(outfit) {
-        $('.users').append(`<input type='image' class='outfit-thumbnail', src='${outfit.image.url}', data-id='${outfit.id}', onclick='showOutfit(this)'></input>`)
-        if (outfit.caption != null) {
-          $('.users').append(`<p><font color="grey"><em>${outfit.caption}</em></font></p>`)
-        }
+        createOutfitThumnail(outfit);
       });
     } else {
       $('.users').append('<h1>This board has no outfits</h1>')
     };
   });
+};
+
+var createOutfitThumnail = (outfit) => {
+  $('.users').append(`<input type='image' class='outfit-thumbnail', src='${outfit.image.url}', data-id='${outfit.id}', onclick='showOutfit(this)'></input>`)
+  if (outfit.caption != null) {
+    $('.users').append(`<p><font color="grey"><em>${outfit.caption}</em></font></p>`)
+  };
 };
 
 var showOutfit = (outfit) => {
@@ -58,11 +61,14 @@ var showOutfit = (outfit) => {
   $.get(url, function (outfit) {
     $('.users').append($('<img>', {class:'outfit-show', src:`${outfit.image.url}`}))
     if (outfit.hashtags) {
-      var tagsLabel = $('.users').append("Tags: ")
-      var hashtags = outfit.tags.forEach(function(tag) {
-                      $('.users').append(`#<a href='#' class="tags" data-id= "${tag.id}" data-name="${tag.name}">${tag.name}</a> `)
-                    })
-      return tagsLabel + hashtags
+      var tagsLabel = "<p>Tags: "
+      var tags = []
+      outfit.tags.forEach(function(tag) {
+        tags.push(`#<a href='#' class="tags" data-id= "${tag.id}" data-name="${tag.name}">${tag.name}</a>`)
+      });
+      var tagsHTML = tags.join(' ')
+      var innerHTML = tagsLabel + tagsHTML + "</p>"
+      $('.users').append(innerHTML)
     };
   });
 };
@@ -73,10 +79,7 @@ var listTaggedOutfits = (tag) => {
     if (outfits.length) {
       $('.users').append(`<h1>#${tag.dataset.name}</h1>`)
       outfits.forEach(function(outfit) {
-        $('.users').append(`<input type='image' class='outfit-thumbnail', src='${outfit.image.url}', data-id='${outfit.id}', onclick='showOutfit(this)'></input>`)
-        if (outfit.caption != null) {
-          $('.users').append(`<p><font color="grey"><em>${outfit.caption}</em></font></p>`)
-        };
+        createOutfitThumnail(outfit);
       });
     };
   });
