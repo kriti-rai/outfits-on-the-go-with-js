@@ -24,7 +24,7 @@ function attachListenersForBoards() {
 };
 
 var listBoards = (data) => {
-  $.get(data.value, function(boards) {
+  $.get(data.dataset.url, function(boards) {
     $('.users').empty();
     $('.users').append('<h1>Boards</h1>')
     boards.forEach(function(board) {
