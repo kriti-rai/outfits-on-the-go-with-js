@@ -38,8 +38,8 @@
                   Account
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                   <li><%= link_to "Edit Account", edit_user_path(current_user), {class: "dropdown-item"} %></li>
-                   <li><%= link_to "Delete Account", current_user, {method: :delete, data: {confirm: "Are you sure?"}, class: "dropdown-item"} %></li>
+                   <li><%= link_to "Edit Account", edit_user_path(current_user), {class: "dropdown-item", id: "edit-account"} %></li>
+                   <li><%= link_to "Delete Account", current_user, {method: :delete, data: {confirm: "Are you sure?"}, class: "dropdown-item", id: "delete-account"} %></li>
                  </ul>
                </div>
               <li class="nav-item">
