@@ -1,10 +1,12 @@
 <%= form_for @user do |f|%>
-  <%= f.file_field :image, class: "btn btn-primary btn-lg", class: "form-group" %>
-
-  Username: <%= f.text_field :username %><br>
-  Email Address: <%= f.text_field :email_address %><br>
-  Password: <%= f.password_field :password %><br>
-  Bio: <%= f.text_field :bio %><br>
-  <%= f.submit class: "btn btn-primary btn-sm"%>
+  <div class="login-form">
+    <p><%= f.file_field :image %></p>
+    <br>
+    Username: <%= f.text_field :username %><br>
+    Email Address: <%= f.text_field :email_address %><br>
+    Password: <%= f.password_field :password %><br>
+    Bio: <%= f.text_field :bio %><br>
+    <%= f.submit class: "button"%>
+  </div>
 <% end %>
 <br>
