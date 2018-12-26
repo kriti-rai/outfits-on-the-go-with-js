@@ -40,7 +40,7 @@ var listOutfits = (data) => {
     if (outfits.length) {
       $('.col-lg-12').append('<h1>Outfits</h1>')
       outfits.forEach(function(outfit) {
-        createOutfitThumnail(outfit);
+        createOutfitThumbnail(outfit);
       });
     } else {
       $('.col-lg-12').append('<h1>This board has no outfits</h1>')
@@ -48,7 +48,7 @@ var listOutfits = (data) => {
   });
 };
 
-var createOutfitThumnail = (outfit) => {
+var createOutfitThumbnail = (outfit) => {
   $('.col-lg-12').append(`<input type='image' class='outfit-thumbnail', src='${outfit.image.url}', data-id='${outfit.id}', onclick='showOutfit(this)'></input>`)
   if (outfit.caption != null) {
     $('.col-lg-12').append(`<p><font color="grey"><em>${outfit.caption}</em></font></p>`)
@@ -79,7 +79,7 @@ var listTaggedOutfits = (tag) => {
     if (outfits.length) {
       $('.col-lg-12').append(`<h1>#${tag.dataset.name}</h1>`)
       outfits.forEach(function(outfit) {
-        createOutfitThumnail(outfit);
+        createOutfitThumbnail(outfit);
       });
     };
   });
