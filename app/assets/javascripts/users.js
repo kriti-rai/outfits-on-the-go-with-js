@@ -6,19 +6,21 @@ function attachListenersForUsers() {
   //show users
   $('#users').on('click', function(e) {
     e.preventDefault();
-    $.get(`${this.href}`, function(users) {
-      listUsers(users);
-    });
+    listUsers(users);
+  });
+
+  //shows current user's page
+  $('#current-user').on('click', function(e) {
+    e.preventDefault();
+    showCurrentUser(this);
   });
 
   //Next User button
   $('body').on('click', '#nextUser', function (e) {
     e.preventDefault();
-    $('.col-lg-12').empty()
-    $.get(this.dataset.url, function(user) {
-      userHTML(user)
-    });
- });
+    showNextUser(this);
+  });
+
 
   //upon login shows to user's profile
   // $('.login-form').on('submit', function(e) {
@@ -42,20 +44,34 @@ function attachListenersForUsers() {
   //   });
   // });
 
-
-
 };
 
-var listUsers = (users) => {
+var listUsers = (data) => {
+  $.get(`${data.href}`, function(users) {
+    $('.col-lg-12').empty()
+    users.forEach(function(user) {
+      if (user.image.url === null) {
+        $('.col-lg-12').append(`<input type='image' class='user-thumbnail', src="/assets/no_image.png", data-id='${user.id}', onclick='showUser(this)'></input>`)
+      } else {
+        var img = new Image();
+        $('.col-lg-12').append(`<input type='image' class='user-thumbnail', src='${user.image.url}', data-id='${user.id}', onclick='showUser(this)'></input>`)
+      }
+      $('.col-lg-12').append($(`<div class="figcaption">${user.username}</div>`))
+    });
+  });
+};
+
+var showCurrentUser = (user) => {
+  $.getJSON(`${user.href}`, function(user) {
+    $('.col-lg-12').empty();
+    userHTML(user);
+  });
+};
+
+var showNextUser = (user) => {
   $('.col-lg-12').empty()
-  users.forEach(function(user) {
-    if (user.image.url === null) {
-      $('.col-lg-12').append(`<input type='image' class='user-thumbnail', src="/assets/no_image.png", data-id='${user.id}', onclick='showUser(this)'></input>`)
-    } else {
-      var img = new Image();
-      $('.col-lg-12').append(`<input type='image' class='user-thumbnail', src='${user.image.url}', data-id='${user.id}', onclick='showUser(this)'></input>`)
-    }
-    $('.col-lg-12').append($(`<div class="figcaption">${user.username}</div>`))
+  $.get(user.dataset.url, function(user) {
+    userHTML(user)
   });
 };
 
