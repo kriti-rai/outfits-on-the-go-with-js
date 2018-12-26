@@ -49,7 +49,6 @@ function attachListenersForUsers() {
 var listUsers = (users) => {
   $('.col-lg-12').empty()
   users.forEach(function(user) {
-    $('.col-lg-12').append("<br><br>")
     if (user.image.url === null) {
       $('.col-lg-12').append(`<input type='image' class='user-thumbnail', src="/assets/no_image.png", data-id='${user.id}', onclick='showUser(this)'></input>`)
     } else {
@@ -61,7 +60,6 @@ var listUsers = (users) => {
 };
 
 var userHTML = (user) => {
-  $('.col-lg-12').append("<br><br>")
   if (user.image.url != null) {
     $('.col-lg-12').append($('<img>', {class:'user-show', src:`${user.image.url}`}))
   } else {
