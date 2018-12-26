@@ -25,41 +25,41 @@ function attachListenersForBoards() {
 
 var listBoards = (data) => {
   $.get(data.dataset.url, function(boards) {
-    $('.users').empty();
-    $('.users').append('<h1>Boards</h1>')
+    $('.col-lg-12').empty();
+    $('.col-lg-12').append('<h1>Boards</h1>')
     boards.forEach(function(board) {
-      $('.users').append(`<h5><a href="/boards/${board.id}" class="board">${board.name}</a></h5>`)
+      $('.col-lg-12').append(`<h5><a href="/boards/${board.id}" class="board">${board.name}</a></h5>`)
     });
   });
 };
 
 var listOutfits = (data) => {
   var url = data.href + "/outfits"
-  $('.users').empty();
+  $('.col-lg-12').empty();
   $.get(url, function(outfits) {
     if (outfits.length) {
-      $('.users').append('<h1>Outfits</h1>')
+      $('.col-lg-12').append('<h1>Outfits</h1>')
       outfits.forEach(function(outfit) {
         createOutfitThumnail(outfit);
       });
     } else {
-      $('.users').append('<h1>This board has no outfits</h1>')
+      $('.col-lg-12').append('<h1>This board has no outfits</h1>')
     };
   });
 };
 
 var createOutfitThumnail = (outfit) => {
-  $('.users').append(`<input type='image' class='outfit-thumbnail', src='${outfit.image.url}', data-id='${outfit.id}', onclick='showOutfit(this)'></input>`)
+  $('.col-lg-12').append(`<input type='image' class='outfit-thumbnail', src='${outfit.image.url}', data-id='${outfit.id}', onclick='showOutfit(this)'></input>`)
   if (outfit.caption != null) {
-    $('.users').append(`<p><font color="grey"><em>${outfit.caption}</em></font></p>`)
+    $('.col-lg-12').append(`<p><font color="grey"><em>${outfit.caption}</em></font></p>`)
   };
 };
 
 var showOutfit = (outfit) => {
-  $('.users').empty();
+  $('.col-lg-12').empty();
   var url = `/outfits/${outfit.dataset.id}`
   $.get(url, function (outfit) {
-    $('.users').append($('<img>', {class:'outfit-show', src:`${outfit.image.url}`}))
+    $('.col-lg-12').append($('<img>', {class:'outfit-show', src:`${outfit.image.url}`}))
     if (outfit.hashtags) {
       var tagsLabel = "<p>Tags: "
       var tags = []
@@ -68,16 +68,16 @@ var showOutfit = (outfit) => {
       });
       var tagsHTML = tags.join(' ')
       var innerHTML = tagsLabel + tagsHTML + "</p>"
-      $('.users').append(innerHTML)
+      $('.col-lg-12').append(innerHTML)
     };
   });
 };
 
 var listTaggedOutfits = (tag) => {
-  $('.users').empty();
+  $('.col-lg-12').empty();
   $.get(`/hashtags/${tag.dataset.name}`, function (outfits) {
     if (outfits.length) {
-      $('.users').append(`<h1>#${tag.dataset.name}</h1>`)
+      $('.col-lg-12').append(`<h1>#${tag.dataset.name}</h1>`)
       outfits.forEach(function(outfit) {
         createOutfitThumnail(outfit);
       });
