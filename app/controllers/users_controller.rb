@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_login
   skip_before_action :require_login, only: [:new, :create]
-  skip_before_action :verify_authenticity_token, only: [:destroy]
+  skip_before_action :verify_authenticity_token, only: [:destroy, :update]
   before_action :set_user, only: [:edit, :update, :show, :next, :destroy]
 
   def new
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = "Update successful"
-      redirect_to @user
+      render json: @user
     end
   end
 
