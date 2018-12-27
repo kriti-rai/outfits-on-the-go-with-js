@@ -54,24 +54,29 @@ function attachListenersForUsers() {
   //delete account
   $('#delete-account').on('click', function(e) {
     e.preventDefault();
-    deleteAccount(this);
+    let dialogue = confirm("Are you sure you want to delete your account?")
+    if (dialogue) {
+      deleteAction(this);
+    };
+    return false;
+  });
+
+  //sign out
+  $('#signout').on('click', function(e) {
+    e.preventDefault();
+    deleteAction(this);
   });
 
 };
 
-//delete account
-var deleteAccount = (data) => {
-  let dialogue = confirm("Are you sure you want to delete your account?")
-  if (dialogue) {
-    $.ajax({
-      url: data.href,
-      type: "DELETE",
-      success: function(response) {
-        window.location.replace("/");
-      }
-    });
-  };
-  return false
+var deleteAction = (data) => {
+  $.ajax({
+    url: data.href,
+    type: "DELETE",
+    success: function(response) {
+      window.location.replace("/");
+    }
+  });
 };
 
 
