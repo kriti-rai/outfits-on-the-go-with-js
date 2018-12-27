@@ -37,9 +37,21 @@ class OutfitsController < ApplicationController
 
   def index
     @board = Board.find(params[:board_id])
+    @outfits = @board.outfits
+    # respond_to do |format|
+    #   format.html { render :index }
+    #   format.json { render json: @users }
+    # end
+
+    render json: @outfits
   end
 
   def show
+    render json: @outfit
+    # respond_to do |format|
+    #   format.html { render :show }
+    #   format.json { render json: @outfit}
+    # end
   end
 
   def destroy
