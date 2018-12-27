@@ -38,9 +38,17 @@ function attachListenersForUsers() {
   });
 
   // edit Account
-  $('#login-form').on('submit', function(e) {
+  $('body').on('submit', '.edit_user', function (e) {
     e.preventDefault();
-    debugger
+    $.ajax({
+      url: this.action,
+      type: "PATCH",
+      data: $(this).serialize(),
+      success: function(response) {
+        $('.col-lg-12').empty();
+        userHTML(response);
+      }
+    });
   });
 
   //delete account
@@ -58,7 +66,6 @@ var deleteAccount = (data) => {
     $.ajax({
       url: data.href,
       type: "DELETE",
-      data: this.serialize,
       success: function(response) {
         window.location.replace("/");
       }
@@ -66,30 +73,6 @@ var deleteAccount = (data) => {
   };
   return false
 };
-
-
-  //upon login shows to user's profile
-  // $('.login-form').on('submit', function(e) {
-  //   debugger
-  //   e.preventDefault();
-  //   $.ajax({
-  //     url: this.action,
-  //     method: 'POST',
-  //     data:  {
-  //       'authenticity_token': $("input[name='authenticity_token']").val(),
-  //       'username': $("input[name='username']").val(),
-  //       'password': $("input[name='password']").val()
-  //     }
-  //   }).done(function (user) {
-  //     e.preventDefault()
-  //     $('.col-lg-12').empty();
-  //     $('.col-lg-12').prepend("<br><br><br><br><br>")
-  //     $.get(`/users/${user.id}`, function(user) {
-  //       showLoggedUserHTML(user);
-  //     });
-  //   });
-  // });
-
 
 
 var listUsers = (data) => {
@@ -156,20 +139,3 @@ var showFeed = (data) => {
     })
   });
 };
-
-// var showLoggedUserHTML = (user) => {
-//   var noImagePath = "./images/no_image.png"
-//   if (user.image != null) {
-//     $('.col-lg-12').append($('<img>', {class:'user-show', src:`${user.image.url}`}))
-//   } else {
-//     $('.col-lg-12').append($('<img>', {class:'user-show', src:'../../no_image.png'})) //image path does not work
-//
-//   }
-//   $('.col-lg-12').append($(`<br><h1>${user.username}!</h1>`))
-//   user.image != null ? $('.col-lg-12').append(`<h6><em><font color= 'grey'>Bio: ${user.bio}</em></h6>`) : false
-//   if (user.boards.length) {
-//     $('.col-lg-12').append(`<p><button data-url="/users/${user.id}/boards" class="button">Boards</button><p>`)
-//   }
-//
-//   $('.col-lg-12').append(`<p><button data-url="/users/${user.id}/next" id="nextUser" class="button">Next User</button></p>`)
-// }
