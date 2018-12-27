@@ -17,7 +17,7 @@ module SessionsHelper
   def log_user_in
     session[:user_id] = @user.id
     flash[:success] = "Logged in succesfully"
-    render json: @user
+    redirect_to @user
   end
 
 end
