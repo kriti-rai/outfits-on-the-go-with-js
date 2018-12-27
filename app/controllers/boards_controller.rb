@@ -36,15 +36,20 @@ class BoardsController < ApplicationController
 
   def feed
     @boards = Board.newest_to_oldest
+    respond_to do |format|
+      format.html { render :feed }
+      format.json { render json: @boards }
+    end
   end
 
   def show
     @user = @board.user
     @outfit = Outfit.new
-    respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @board }
-    end
+    # respond_to do |format|
+    #   format.html { render :show }
+    #   format.json { render json: @board }
+    # end
+    render json: @board
   end
 
   def index
