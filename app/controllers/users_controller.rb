@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_login
   skip_before_action :require_login, only: [:new, :create]
+  skip_before_action :verify_authenticity_token, only: [:destroy]
   before_action :set_user, only: [:edit, :update, :show, :next, :destroy]
 
   def new
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
 
   def edit
     if @user == current_user
-      render 'edit'
+      render layout: false
     else
       flash[:error] = "Access denied"
       redirect_to @user
@@ -39,19 +40,23 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: @user
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @user }
+    end
+    # render json: @user
   end
 
   def index
     @users = User.sorted
-    respond_to do |format|
-      format.html { render :index }
-      format.json { render json: @users }
-    end
+    # respond_to do |format|
+    #   format.html { render :index }
+    #   format.json { render json: @users }
+    # end
+    render json: @users
   end
 
   def next
-    #takes one to next user's show page
     @next = @user.next
     render json: @next
   end
@@ -59,6 +64,7 @@ class UsersController < ApplicationController
   def destroy
     if @user == current_user
       @user.destroy
+      flash[:error] = "Account successfully deleted"
       redirect_to root_url
     else
       flash[:error] = "Access denied"
