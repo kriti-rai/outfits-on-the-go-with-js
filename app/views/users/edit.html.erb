@@ -1,7 +1,6 @@
-<h1> My Account</h1>
-<br>
-<div id="edit-form">
+<div class="login-form">
+  <h1> My Account</h1>
+  <br>
   <%= render 'form' %>
+  <%= link_to "Cancel", @user , {class: "button"}%>
 </div>
-
-<%= link_to "Cancel", @user , {class: "button"}%>
