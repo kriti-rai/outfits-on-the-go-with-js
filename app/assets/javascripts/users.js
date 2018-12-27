@@ -6,7 +6,7 @@ function attachListenersForUsers() {
   //show users
   $('#users').on('click', function(e) {
     e.preventDefault();
-    listUsers(users);
+    listUsers(this);
   });
 
   //shows current user's page
@@ -28,11 +28,44 @@ function attachListenersForUsers() {
   });
 
 
-  //edit page
+  //render edit account
   $('#edit-account').on('click', function(e) {
+    e.preventDefault();
+    $.get(this.href, function(editForm) {
+      $('.col-lg-12').empty();
+      $('.col-lg-12').append(editForm)
+    })
+  });
+
+  // edit Account
+  $('#login-form').on('submit', function(e) {
     e.preventDefault();
     debugger
   });
+
+  //delete account
+  $('#delete-account').on('click', function(e) {
+    e.preventDefault();
+    deleteAccount(this);
+  });
+
+};
+
+//delete account
+var deleteAccount = (data) => {
+  let dialogue = confirm("Are you sure you want to delete your account?")
+  if (dialogue) {
+    $.ajax({
+      url: data.href,
+      type: "DELETE",
+      data: this.serialize,
+      success: function(response) {
+        window.location.replace("/");
+      }
+    });
+  };
+  return false
+};
 
 
   //upon login shows to user's profile
@@ -57,7 +90,7 @@ function attachListenersForUsers() {
   //   });
   // });
 
-};
+
 
 var listUsers = (data) => {
   $.get(`${data.href}`, function(users) {
