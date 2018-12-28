@@ -12,7 +12,9 @@ function attachListenersForUsers() {
   //shows current user's page
   $('#current-user').on('click', function(e) {
     e.preventDefault();
-    showCurrentUser(this);
+    $.getJSON(`${this.href}`, function(user) {
+      showCurrentUser(user);
+    });
   });
 
   //Next User button
@@ -28,7 +30,7 @@ function attachListenersForUsers() {
   });
 
 
-  //render edit account
+  //render edit form
   $('#edit-account').on('click', function(e) {
     e.preventDefault();
     $.get(this.href, function(editForm) {
@@ -40,13 +42,16 @@ function attachListenersForUsers() {
   // edit Account
   $('body').on('submit', '.edit_user', function (e) {
     e.preventDefault();
+    debugger // come back to this
+    //image not loading/updating
+    //does not render the current image either
     $.ajax({
       url: this.action,
-      type: "PATCH",
+      type: "PUT",
       data: $(this).serialize(),
       success: function(response) {
-        $('.col-lg-12').empty();
-        userHTML(response);
+        debugger
+        showCurrentUser(response)
       }
     });
   });
@@ -96,16 +101,15 @@ var listUsers = (data) => {
 };
 
 var showCurrentUser = (user) => {
-  $.getJSON(`${user.href}`, function(user) {
     $('.col-lg-12').empty();
     userHTML(user);
-  });
 };
 
 var showNextUser = (user) => {
   $('.col-lg-12').empty()
   $.get(user.dataset.url, function(user) {
     userHTML(user)
+    $('.col-lg-12').append(`<p><button data-url="/users/${user.id}/next" id="nextUser" class="button">Next User</button></p>`)
   });
 };
 
@@ -122,16 +126,15 @@ var userHTML = (user) => {
   if (user.boards.length) {
     $('.col-lg-12').append(`<p><button data-url="/users/${user.id}/boards" class="button" id="boards">Boards</button></p>`)
   };
-
-  $('.col-lg-12').append(`<p><button data-url="/users/${user.id}/next" id="nextUser" class="button">Next User</button></p>`)
-
 }
+
 
 var showUser = (user) => {
   var url= `/users/${user.dataset.id}`
   $.getJSON(url, function(user) {
     $('.col-lg-12').empty();
     userHTML(user);
+    $('.col-lg-12').append(`<p><button data-url="/users/${user.id}/next" id="nextUser" class="button">Next User</button></p>`)
   });
 };
 
