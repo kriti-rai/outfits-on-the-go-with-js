@@ -15,18 +15,9 @@ class Board {
 }
 
 function attachListenersForBoards() {
-  //list boards
-  $('body').on('click', '#boards', function (e) {
-    e.preventDefault();
-    let url = this.dataset.url
-    listBoards(url);
-   });
-
    //list current user's boards
    $('body').on('click', '#my-boards', function (e) {
      e.preventDefault();
-     debugger
-     //this = <a class="nav-link" id="my-boards" href="/users/8/boards">My Boards</a>
      let url = this.href
      listBoards(url);
     });
