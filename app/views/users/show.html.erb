@@ -1,0 +1,14 @@
+<% if @user.image? %>
+  <%= image_tag @user.image.url, {class: "user-show"} %>
+<% else %>
+  <%= image_tag asset_path('no_image.png'), {class: "user-show"} %>
+<% end %>
+<br>
+<br>
+<h1><%=@user.username %>!</h1>
+<% if @user.bio != nil %>
+  <h6><em><font color= 'grey'>Bio: <%=@user.bio%></em></h6>
+<% end %>
+<br>
+<br>
+<%= link_to "Boards", user_boards_path(@user), {class: "button", id:"my-boards"} %>
