@@ -7,7 +7,7 @@ class Board {
   constructor(board) {
     this.id = board.id;
     this.name = board.name;
-    this.created_at = formatDate(board.created_at);
+    this.created_at = board.created_at;
     this.user_id = board.user_id;
     this.user = board.user;
     this.outfits = board.outfits;
@@ -37,7 +37,7 @@ function attachListenersForBoards() {
 
 var listBoards = (url) => {
   $.get(url, function(boards) {
-    $('.col-lg-12').empty();
+    clear();
     $('.col-lg-12').append('<h1>Boards</h1>')
     boards.forEach(function(board) {
       $('.col-lg-12').append(`<h5><a href="/boards/${board.id}" class="board">${board.name}</a></h5>`)
@@ -45,9 +45,13 @@ var listBoards = (url) => {
   });
 };
 
+function clear() {
+  $('.col-lg-12').empty();
+};
+
 var listOutfits = (data) => {
   var url = data.href + "/outfits"
-  $('.col-lg-12').empty();
+  clear();
   $.get(url, function(outfits) {
     if (outfits.length) {
       $('.col-lg-12').append('<h1>Outfits</h1>')
@@ -68,7 +72,7 @@ var createOutfitThumbnail = (outfit) => {
 };
 
 var showOutfit = (outfit) => {
-  $('.col-lg-12').empty();
+  clear();
   var url = `/outfits/${outfit.dataset.id}`
   $.get(url, function (outfit) {
     $('.col-lg-12').append($('<img>', {class:'outfit-show', src:`${outfit.image.url}`}))
@@ -86,7 +90,7 @@ var showOutfit = (outfit) => {
 };
 
 var listTaggedOutfits = (tag) => {
-  $('.col-lg-12').empty();
+  clear();
   $.get(`/hashtags/${tag.dataset.name}`, function (outfits) {
     if (outfits.length) {
       $('.col-lg-12').append(`<h1>#${tag.dataset.name}</h1>`)
