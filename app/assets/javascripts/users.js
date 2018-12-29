@@ -34,7 +34,7 @@ function attachListenersForUsers() {
   $('#edit-account').on('click', function(e) {
     e.preventDefault();
     $.get(this.href, function(editForm) {
-      $('.col-lg-12').empty();
+      clear();
       $('.col-lg-12').append(editForm)
     })
   });
@@ -87,7 +87,7 @@ var deleteAction = (data) => {
 
 var listUsers = (data) => {
   $.get(`${data.href}`, function(users) {
-    $('.col-lg-12').empty()
+    clear();
     users.forEach(function(user) {
       if (user.image.url === null) {
         $('.col-lg-12').append(`<input type='image' class='user-thumbnail', src="/assets/no_image.png", data-id='${user.id}', onclick='showUser(this)'></input>`)
@@ -101,12 +101,12 @@ var listUsers = (data) => {
 };
 
 var showCurrentUser = (user) => {
-    $('.col-lg-12').empty();
+    clear();
     userHTML(user);
 };
 
 var showNextUser = (user) => {
-  $('.col-lg-12').empty()
+  clear();
   $.get(user.dataset.url, function(user) {
     userHTML(user)
     $('.col-lg-12').append(`<p><button data-url="/users/${user.id}/next" id="nextUser" class="button">Next User</button></p>`)
@@ -132,7 +132,7 @@ var userHTML = (user) => {
 var showUser = (user) => {
   var url= `/users/${user.dataset.id}`
   $.getJSON(url, function(user) {
-    $('.col-lg-12').empty();
+    clear();
     userHTML(user);
     $('.col-lg-12').append(`<p><button data-url="/users/${user.id}/next" id="nextUser" class="button">Next User</button></p>`)
   });
@@ -140,7 +140,7 @@ var showUser = (user) => {
 
 var showFeed = (data) => {
   $.getJSON(`${data.href}`, function(resp) {
-    $('.col-lg-12').empty()
+    clear();
     $('.col-lg-12').append('<h1>Feed</h1><br>')
     resp.forEach(function(board) {
       $('.col-lg-12').append(`<p><a href="#" data-url="/users/${board.user.id}">${board.user.username}</a> created <a href="#" data-url="/boards/${board.id}">${board.name}</a> on ${board.created_at}</p>`)
