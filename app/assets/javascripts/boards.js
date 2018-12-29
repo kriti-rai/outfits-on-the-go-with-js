@@ -3,12 +3,33 @@ $(document).on('turbolinks:load', function() {
   attachListenersForBoards();
 });
 
+class Board {
+  constructor(board) {
+    this.id = board.id;
+    this.name = board.name;
+    this.created_at = formatDate(board.created_at);
+    this.user_id = board.user_id;
+    this.user = board.user;
+    this.outfits = board.outfits;
+  }
+}
+
 function attachListenersForBoards() {
   //list boards
   $('body').on('click', '#boards', function (e) {
     e.preventDefault();
-    listBoards(this);
+    let url = this.dataset.url
+    listBoards(url);
    });
+
+   //list current user's boards
+   $('body').on('click', '#my-boards', function (e) {
+     e.preventDefault();
+     debugger
+     //this = <a class="nav-link" id="my-boards" href="/users/8/boards">My Boards</a>
+     let url = this.href
+     listBoards(url);
+    });
 
    //list outfits
    $('body').on('click', 'a.board', function (e) {
@@ -23,8 +44,8 @@ function attachListenersForBoards() {
      });
 };
 
-var listBoards = (data) => {
-  $.get(data.dataset.url, function(boards) {
+var listBoards = (url) => {
+  $.get(url, function(boards) {
     $('.col-lg-12').empty();
     $('.col-lg-12').append('<h1>Boards</h1>')
     boards.forEach(function(board) {
@@ -84,3 +105,8 @@ var listTaggedOutfits = (tag) => {
     };
   });
 };
+
+function formatDate(date) {
+  const d = new Date(date)
+  return d.toDateString();
+}
