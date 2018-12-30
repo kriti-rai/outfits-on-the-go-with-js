@@ -8,9 +8,13 @@ class Board {
     this.id = board.id;
     this.name = board.name;
     this.created_at = board.created_at;
-    this.user_id = board.user_id;
+    this.user_id = board.user.id;
     this.user = board.user;
     this.outfits = board.outfits;
+  }
+
+  createBoardLinks() {
+    return $('.col-lg-12').append(`<h5><a href="/boards/${this.id}" class="board">${this.name}</a></h5>`);
   }
 }
 
@@ -40,7 +44,8 @@ var listBoards = (url) => {
     clear();
     $('.col-lg-12').append('<h1>Boards</h1>')
     boards.forEach(function(board) {
-      $('.col-lg-12').append(`<h5><a href="/boards/${board.id}" class="board">${board.name}</a></h5>`)
+      let newBoard = new Board(board);
+      newBoard.createBoardLinks();
     });
   });
 };
