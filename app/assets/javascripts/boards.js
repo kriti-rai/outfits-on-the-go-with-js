@@ -50,13 +50,9 @@ var listBoards = (url) => {
   });
 };
 
-function clear() {
-  $('.col-lg-12').empty();
-};
+var clear = () => {$('.col-lg-12').empty()};
 
-
-
-function formatDate(date) {
+var formatDate = (date) => {
   const d = new Date(date)
   return d.toDateString();
 }
