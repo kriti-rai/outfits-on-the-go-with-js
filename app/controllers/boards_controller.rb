@@ -1,6 +1,7 @@
 class BoardsController < ApplicationController
   before_action :require_login
   before_action :set_board, only: [:edit, :update, :show, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:destroy, :update]
   include BoardsHelper
 
   def new
@@ -46,10 +47,6 @@ class BoardsController < ApplicationController
   def show
     @user = @board.user
     @outfit = Outfit.new
-    # respond_to do |format|
-    #   format.html { render :show }
-    #   format.json { render json: @board }
-    # end
     render json: @board
   end
 
@@ -65,13 +62,8 @@ class BoardsController < ApplicationController
   end
 
   def destroy
-    if board_user
-      @board.destroy
-      redirect_to user_boards_path(current_user)
-    else
-      flash[:error] = "Permission denied"
-      redirect_to @board
-    end
+    @board.destroy
+    render json: @board.user
   end
 
   private
