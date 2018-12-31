@@ -45,9 +45,8 @@ function attachListenersForBoards() {
 
    //render create form
    $('body').on('click', '#create-board', function (e) {
-     debugger
      e.preventDefault();
-     $.get(this.href, function(form) {
+     $.get(`${this.dataset.url}`, function(form) {
        clear();
        $('.col-lg-12').append(form)
      })
@@ -83,20 +82,6 @@ var listBoards = (url) => {
   });
 };
 
-var showBoard = (uid, id) => {
-
-}
-
-// var listBoardsForCurrentUser  = (url) => {
-//   $.get(url, function(boards) {
-//     clear();
-//     $('.col-lg-12').append(`<h1>Boards <button type="button" data-url="#" id="create-board" class="btn btn-success">Create Board</button></h1>`)
-//     boards.forEach(function(board) {
-//       let newBoard = new Board(board);
-//       $('.col-lg-12').append(newBoard.createBoardLinks());
-//     });
-//   });
-// };
 
 var createBoard = (board) => {
   debugger
