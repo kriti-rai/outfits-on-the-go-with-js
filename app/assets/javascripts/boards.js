@@ -27,7 +27,7 @@ class Board {
         <button type="button" data-url="/boards/${this.id}" id="view-board" class="btn btn-info btn-sm">View</button>
       </h4>
       `
-    if (this.id === currentUID) {
+    if (this.user.id === currentUID) {
       return innerHTML + currentUserBoardsHTML
     } else {
     return innerHTML + userBoardsHTML;
@@ -53,14 +53,16 @@ function attachListenersForBoards() {
    });
 
    //create board
-   $('body').on('submit', '#create-board', function (e) {
+   $('body').on('submit', '#new_board', function (e) {
      e.preventDefault();
      $.ajax({
        url: this.action,
        type: "POST",
        data: $(this).serialize(),
        success: function(response) {
-         listBoards(response);
+         let board = new Board(response)
+         clear();
+         $('.col-lg-12').append(board.createBoardLinks());
        }
      });
     });
