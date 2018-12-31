@@ -1,11 +1,13 @@
+$(attachListenersForOutfits());
+
 class Outfit {
   constructor(outfit) {
     this.id = outfit.id
     outfit.caption? (this.caption = outfit.caption) : false
     this.tags = outfit.tags
     this.image = outfit.image
-    this.board_id = outfit.board_id
-    this.user_id = outfit.user_id
+    this.board_id = outfit.board.id
+    this.user_id = outfit.board.user.id
   }
 }
 
@@ -60,3 +62,17 @@ var listTaggedOutfits = (tag) => {
     };
   });
 };
+
+function attachListenersForOutfits () {
+  $('body').on('click', 'a.board', function (e) {
+    e.preventDefault();
+    listOutfits(this);
+   });
+
+   //list outfits under that hashtag
+   $('body').on('click', 'a.tags', function (e) {
+     e.preventDefault();
+     listTaggedOutfits(this);
+    });
+
+}
