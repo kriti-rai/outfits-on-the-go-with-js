@@ -62,9 +62,9 @@ function attachListenersForBoards() {
     });
 
     //edit board
-    $('body').on('submit', '#edit_board', function (e) {
+    $('body').on('submit', '.edit_board', function (e) {
       e.preventDefault();
-      editBoard(this)
+      editBoard(this);
      });
 
     //delete board
@@ -136,8 +136,21 @@ var deleteBoard = (board) => {
   });
 };
 
-var editBoard = (board) => {
-  debugger
+var editBoard = (data) => {
+  $.ajax({
+    url: data.action,
+    type: "PATCH",
+    data: $(data).serialize(),
+    success: function(response) {
+      clear();
+      let board = new Board(response);
+      clear();
+      $('.col-lg-12').append(`<h1>${board.name}</h1>`)
+      if (board.outfits.length) {
+        listOutfits(board.outfits);
+      }
+    }
+  });
 };
 
 
