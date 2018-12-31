@@ -1,6 +1,10 @@
 $(document).on('turbolinks:load', function() {
+  getCurrentUID();
   attachListenersForUsers();
 });
+
+
+var currentUID = 0
 
 function attachListenersForUsers() {
   //show users
@@ -29,7 +33,6 @@ function attachListenersForUsers() {
     showFeed(this);
   });
 
-
   //render edit form
   $('#edit-account').on('click', function(e) {
     e.preventDefault();
@@ -47,7 +50,7 @@ function attachListenersForUsers() {
     //does not render the current image either
     $.ajax({
       url: this.action,
-      type: "PUT",
+      type: "PATCH",
       data: $(this).serialize(),
       success: function(response) {
         debugger
@@ -84,6 +87,11 @@ var deleteAction = (data) => {
   });
 };
 
+var getCurrentUID = () => {
+  $.getJSON("/signin", function(data) {
+    currentUID = data.id
+  })
+};
 
 var listUsers = (data) => {
   $.get(`${data.href}`, function(users) {
