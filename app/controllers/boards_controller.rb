@@ -20,7 +20,7 @@ class BoardsController < ApplicationController
 
   def edit
     if board_user
-      render 'edit'
+      render layout: false
     else
       flash[:error] = "Permission denied"
       redirect_to @board
@@ -30,7 +30,7 @@ class BoardsController < ApplicationController
   def update
     if @board.update(board_params)
       flash[:success] = "Successfully updated the board"
-      redirect_to @board
+      render json: @board
     else
       render 'edit'
     end
