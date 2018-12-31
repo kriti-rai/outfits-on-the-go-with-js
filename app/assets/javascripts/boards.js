@@ -39,8 +39,8 @@ function attachListenersForBoards() {
    //list current user's boards
    $('body').on('click', '#my-boards', function (e) {
      e.preventDefault();
-     let url = this.href
-     listBoards(url);
+     let url = this.href;
+     listBoards(currentUID,url);
     });
 
    //render create form
@@ -54,23 +54,42 @@ function attachListenersForBoards() {
      e.preventDefault();
      createBoard(this)
     });
+
+    //delete board
+    $('body').on('click', '#delete-board', function (e) {
+      e.preventDefault();
+      deleteBoard(this)
+     });
 };
 
-var listBoards = (url) => {
+////////////////////////HELPER FUNCTIONS////////////////////////////////
+var listBoards = (uid,url) => {
   $.get(url, function(boards) {
-    clear();
-    let user = boards[0].user
-    if (user.id === currentUID) {
-      $('.col-lg-12').append(`<h1> Your Boards <button type="button" data-url="/users/${currentUID}/boards/new" id="create-board" class="btn btn-success">Create Board</button></h1>`)
-    } else {
-      $('.col-lg-12').append(`<h1>${user.username}'s Boards</h1>`)
-    }
-    boards.forEach(function(board) {
-      let newBoard = new Board(board);
-      $('.col-lg-12').append(newBoard.createBoardLinks());
+    $.getJSON(`/users/${uid}`, function(data) {
+      let user = data;
+      clear();
+      if (boards.length) {
+        if (uid === currentUID) {
+          $('.col-lg-12').append(`<h1> Your Boards <button type="button" data-url="/users/${currentUID}/boards/new" id="create-board" class="btn btn-success">Create Board</button></h1>`)
+        } else {
+          $('.col-lg-12').append(`<h1>${user.username}'s Boards</h1>`)
+        }
+        boards.forEach(function(board) {
+          let newBoard = new Board(board);
+          $('.col-lg-12').append(newBoard.createBoardLinks());
+        });
+      } else {
+        if (uid === currentUID) {
+          $('.col-lg-12').append(`<h1>This board is empty <button type="button" data-url="/users/${currentUID}/boards/new" id="create-board" class="btn btn-success">Create Board</button></h1>`)
+        } else {
+          $('.col-lg-12').append(`<h1>${user.username} currently has no boards</h1>`)
+        };
+      };
     });
   });
 };
+
+
 
 var newForm = (form) => {
   $.get(`${form.dataset.url}`, function(form) {
@@ -87,13 +106,22 @@ var createBoard = (board) => {
     success: function(response) {
       let board = new Board(response)
       clear();
-      $('.col-lg-12').append(board.createBoardLinks());
+      listBoards(currentUID,boards)
     }
   });
 };
 
 var deleteBoard = (board) => {
-
+  $.ajax({
+    url: board.dataset.url,
+    type: "DELETE",
+    data: $(board).serialize(),
+    success: function(response) {
+      clear();
+      let user = response;
+      userHTML(response);
+    }
+  });
 };
 
 var editBoard = (board) => {
