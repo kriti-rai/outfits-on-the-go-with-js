@@ -1,8 +1,6 @@
-<div class="login-form">
-  <%= form_for board, url: url, method: method do |f| %>
+<%= form_for board, url: url, method: method do |f| %>
   Name: <%=f.text_field :name %><br>
   <%= f.hidden_field :user_id, value: current_user.id %>
   <br>
   <%= f.submit %>
 <% end %>
-</div>
