@@ -1,4 +1,6 @@
-$(attachListenersForOutfits());
+$(document).on('turbolinks:load', function() {
+  attachListenersForOutfits();
+});
 
 class Outfit {
   constructor(outfit) {
@@ -11,19 +13,33 @@ class Outfit {
   }
 }
 
-var listOutfits = (data) => {
-  var url = data.href + "/outfits"
+function attachListenersForOutfits () {
+  $('body').on('click', 'a.board', function (e) {
+    e.preventDefault();
+    let url = this.href + "/outfits"
+    $.get(url, function(outfits) {
+       listOutfits(outfits);
+     });
+   });
+
+   //list outfits under that hashtag
+   $('body').on('click', 'a.tags', function (e) {
+     e.preventDefault();
+     listTaggedOutfits(this);
+    });
+
+}
+
+var listOutfits = (outfits) => {
   clear();
-  $.get(url, function(outfits) {
-    if (outfits.length) {
-      $('.col-lg-12').append('<h1>Outfits</h1>')
-      outfits.forEach(function(outfit) {
-        createOutfitThumbnail(outfit);
-      });
-    } else {
-      $('.col-lg-12').append('<h1>This board has no outfits</h1>')
-    };
-  });
+  if (outfits.length) {
+    $('.col-lg-12').append('<h1>Outfits</h1>')
+    outfits.forEach(function(outfit) {
+      createOutfitThumbnail(outfit);
+    });
+  } else {
+    $('.col-lg-12').append('<h1>This board has no outfits</h1>')
+  };
 };
 
 var createOutfitThumbnail = (outfit) => {
@@ -62,17 +78,3 @@ var listTaggedOutfits = (tag) => {
     };
   });
 };
-
-function attachListenersForOutfits () {
-  $('body').on('click', 'a.board', function (e) {
-    e.preventDefault();
-    listOutfits(this);
-   });
-
-   //list outfits under that hashtag
-   $('body').on('click', 'a.tags', function (e) {
-     e.preventDefault();
-     listTaggedOutfits(this);
-    });
-
-}
