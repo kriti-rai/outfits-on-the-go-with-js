@@ -46,7 +46,7 @@ function attachListenersForBoards() {
    //render create form
    $('body').on('click', '#create-board', function (e) {
      e.preventDefault();
-     newForm(this);
+     renderForm(this);
    });
 
    //create board
@@ -54,6 +54,18 @@ function attachListenersForBoards() {
      e.preventDefault();
      createBoard(this)
     });
+
+    //render edit form
+    $('body').on('click', '#edit-board', function (e) {
+      e.preventDefault();
+      renderForm(this);
+    });
+
+    //edit board
+    $('body').on('submit', '#edit_board', function (e) {
+      e.preventDefault();
+      editBoard(this)
+     });
 
     //delete board
     $('body').on('click', '#delete-board', function (e) {
@@ -89,7 +101,7 @@ var listBoards = (uid,url) => {
   });
 };
 
-var newForm = (form) => {
+var renderForm = (form) => {
   $.get(`${form.dataset.url}`, function(form) {
     clear();
     $('.col-lg-12').append(form)
@@ -125,7 +137,7 @@ var deleteBoard = (board) => {
 };
 
 var editBoard = (board) => {
-
+  debugger
 };
 
 
