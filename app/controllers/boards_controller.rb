@@ -5,6 +5,7 @@ class BoardsController < ApplicationController
 
   def new
     @board = Board.new
+    render layout: false
   end
 
   def create
@@ -13,7 +14,7 @@ class BoardsController < ApplicationController
     else
       @board = Board.create(board_params)
     end
-    redirect_to @board
+    render json: @board
   end
 
   def edit
