@@ -1,11 +1,13 @@
 class SessionsController < ApplicationController
   before_action :require_login
   skip_before_action :require_login, only: [:new, :create]
+  skip_before_action :verify_authenticity_token, only: [:destroy]
+
 
   def new
     if logged_in?
       @user = current_user
-      redirect_to @user
+      render json: @user
     else
       render 'new'
     end
