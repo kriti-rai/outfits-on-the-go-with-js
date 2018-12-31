@@ -42,11 +42,12 @@ function attachListenersForUsers() {
   });
 
   // edit Account
-  $('body').on('submit', '#edit_user', function (e) {
+  $('body').on('submit', '.edit_user', function (e) {
     e.preventDefault();
     debugger // come back to this
     //image not loading/updating
     //does not render the current image either
+    //"/uploads/user/image/13/mac.jpg" image src is still the same
     $.ajax({
       url: this.action,
       type: "PATCH",
