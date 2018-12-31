@@ -10,8 +10,6 @@ Rails.application.routes.draw do
 
   get '/sortedtags' => 'tags#sorted_tags'
 
-  root to: 'sessions#new'
-
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
   delete '/signout' => 'sessions#destroy'
@@ -20,7 +18,7 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
 
   get '/users/:id/next', to: 'users#next'
-  
+
   resources :users do
     resources :boards , shallow: true do
       resources :outfits, shallow: true
