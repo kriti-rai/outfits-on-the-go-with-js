@@ -43,7 +43,7 @@ function attachListenersForUsers() {
   });
 
   // edit Account
-  $('body').on('submit', '.edit_user', function (e) {
+  $('body').on('submit', '#edit_user', function (e) {
     e.preventDefault();
     debugger // come back to this
     //image not loading/updating
@@ -76,6 +76,8 @@ function attachListenersForUsers() {
   });
 
 };
+
+////////////////////////////HELPER FUNCTIONS///////////////////////////
 
 var deleteAction = (data) => {
   $.ajax({
@@ -130,10 +132,8 @@ var userHTML = (user) => {
   $('.col-lg-12').append($(`<br><h1>${user.username}!</h1>`))
 
   user.image != null ? $('.col-lg-12').append(`<h6><em><font color= 'grey'>Bio: ${user.bio}</em></h6>`) : false
-
-  if (user.boards.length) {
-    $('.col-lg-12').append(`<p><button data-url="/users/${user.id}/boards" onclick="listBoards(this.dataset.url)" class="button" id="boards">Boards</button></p>`)
-  };
+let url = "/users/${user.id}/boards"
+  $('.col-lg-12').append(`<p><button data-url="/users/${user.id}/boards" data-username="${user.username}" class="button" id="boards" onclick="listBoards(${user.id},this.dataset.url)">Boards</button></p>`)
 }
 
 
