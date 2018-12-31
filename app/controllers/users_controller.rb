@@ -33,6 +33,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    raise params.inspect
     if @user.update(user_params)
       flash[:success] = "Update successful"
       render json: @user
@@ -44,15 +45,10 @@ class UsersController < ApplicationController
       format.html { render :show }
       format.json { render json: @user }
     end
-    # render json: @user
   end
 
   def index
     @users = User.sorted
-    # respond_to do |format|
-    #   format.html { render :index }
-    #   format.json { render json: @users }
-    # end
     render json: @users
   end
 
