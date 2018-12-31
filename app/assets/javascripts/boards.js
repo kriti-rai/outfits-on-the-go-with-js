@@ -89,8 +89,6 @@ var listBoards = (uid,url) => {
   });
 };
 
-
-
 var newForm = (form) => {
   $.get(`${form.dataset.url}`, function(form) {
     clear();
@@ -106,7 +104,8 @@ var createBoard = (board) => {
     success: function(response) {
       let board = new Board(response)
       clear();
-      listBoards(currentUID,boards)
+      let url = `/users/${currentUID}/boards`
+      listBoards(currentUID,url)
     }
   });
 };
@@ -118,8 +117,9 @@ var deleteBoard = (board) => {
     data: $(board).serialize(),
     success: function(response) {
       clear();
-      let user = response;
-      userHTML(response);
+      let uid = response.id;
+      let url = `/users/${uid}/boards`;
+      listBoards(uid,url);
     }
   });
 };
