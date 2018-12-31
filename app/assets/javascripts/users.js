@@ -3,7 +3,6 @@ $(document).on('turbolinks:load', function() {
   attachListenersForUsers();
 });
 
-
 var currentUID = 0
 
 function attachListenersForUsers() {
