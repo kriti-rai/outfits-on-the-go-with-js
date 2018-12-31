@@ -151,7 +151,7 @@ var showFeed = (data) => {
     clear();
     $('.col-lg-12').append('<h1>Feed</h1><br>')
     resp.forEach(function(board) {
-      $('.col-lg-12').append(`<p><a href="#" data-url="/users/${board.user.id}">${board.user.username}</a> created <a href="#" data-url="/boards/${board.id}">${board.name}</a> on ${board.created_at}</p>`)
+      $('.col-lg-12').append(`<p><a href="#" data-url="/users/${board.user.id}">${board.user.username}</a> created <a href="#" data-url="/boards/${board.id}">${board.name}</a> on ${formatDate(board.created_at)}</p>`)
     })
   });
 };
