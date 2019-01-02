@@ -1,5 +1,6 @@
 
 $(document).on('turbolinks:load', function() {
+  initializeBoards();
   attachListenersForBoards();
 });
 
@@ -10,9 +11,14 @@ class Board {
     this.id = board.id;
     this.name = board.name;
     this.created_at = formatDate(board.created_at);
-    this.user_id = board.user.id;
-    this.user = board.user;
-    this.outfits = board.outfits;
+    // if (this.user) {
+    //   this.user.id = board.user_id;
+    // } else if (this.user_id) {
+    //   this.user_id = board.user_id;
+    // }
+    this.user_id = board.user_id;
+    // this.user = board.user;
+    // this.outfits = board.outfits;
   }
 
   createBoardLinks() {
@@ -78,6 +84,26 @@ function attachListenersForBoards() {
 
 ////////////////////////HELPER FUNCTIONS////////////////////////////////
 
+var initializeBoards = (url) => {
+  $.get("/users", function (users) {
+    // debugger
+    users.forEach(function (user) {
+      if (user.boards.length) {
+        user.boards.forEach(function(board) {
+          let newBoard = new Board(board);
+          updateBoardsCollection(boards, newBoard);
+        })
+      }
+    });
+  })
+}
+
+function updateBoardsCollection (boards, board) {
+  if (boards.indexOf(board) === -1) {
+    boards.push(board);
+  };
+};
+
 
 var listBoards = (uid,url) => {
   $.get(url, function(boards) {
@@ -103,7 +129,6 @@ var listBoards = (uid,url) => {
       };
     });
   });
-  debugger
 };
 
 var renderForm = (form) => {
