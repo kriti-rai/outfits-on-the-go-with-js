@@ -147,11 +147,9 @@ var showUser = (user) => {
 };
 
 var showFeed = (data) => {
-  $.getJSON(`${data.href}`, function(resp) {
     clear();
     $('.col-lg-12').append('<h1>Feed</h1><br>')
-    resp.forEach(function(board) {
-      $('.col-lg-12').append(`<p><a href="#" data-url="/users/${board.user.id}">${board.user.username}</a> created <a href="#" data-url="/boards/${board.id}">${board.name}</a> on ${formatDate(board.created_at)}</p>`)
+    boards.forEach(function(board) {
+      $('.col-lg-12').append(`<p><a href="#" data-url="/users/${board.user_id}">${board.user.username}</a> created <a href="#" data-url="/boards/${board.id}">${board.name}</a> on ${formatDate(board.created_at)}</p>`)
     })
-  });
 };
