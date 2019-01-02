@@ -39,6 +39,24 @@ class Board {
 }
 
 function attachListenersForBoards() {
+  //view board by clicking view
+  $('body').on('click', '#view-board', function (e) {
+    e.preventDefault();
+    let url = this.dataset.url + "/outfits"
+    $.get(url, function(outfits) {
+       listOutfits(outfits);
+     });
+   });
+
+   //view board by clicking title
+  $('body').on('click', 'a.board', function (e) {
+    e.preventDefault();
+    let url = this.href + "/outfits"
+    $.get(url, function(outfits) {
+       listOutfits(outfits);
+     });
+   });
+   
    //list current user's boards
    $('body').on('click', '#my-boards', function (e) {
      e.preventDefault();
