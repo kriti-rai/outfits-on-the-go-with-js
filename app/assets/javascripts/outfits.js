@@ -6,32 +6,25 @@ class Outfit {
   constructor(outfit) {
     this.id = outfit.id
     outfit.caption? (this.caption = outfit.caption) : false
-    this.tags = outfit.tags
+    this.tags = outfit.tags //outfit.hashtags?
     this.image = outfit.image
+    this.board = outfit.board
     this.board_id = outfit.board.id
+    this.user = outfit.user
     this.user_id = outfit.board.user.id
   }
+
+  createOutfitThumbnail () {
+    let imgThumbnailHTML = `<input type='image' class='outfit-thumbnail', src='${this.image.url}', data-id='${this.id}', onclick='showOutfit(this)'></input>`
+    let captionHTML
+    (this.caption != null) ? captionHTML = `<p><font color="grey"><em>${this.caption}</em></font></p>` : false
+    return imgThumbnailHTML + captionHTML
+  };
 }
 
-function attachListenersForOutfits () {
-  //view board by clicking view
-  $('body').on('click', '#view-board', function (e) {
-    e.preventDefault();
-    let url = this.dataset.url + "/outfits"
-    $.get(url, function(outfits) {
-       listOutfits(outfits);
-     });
-   });
-   
-   //view board by clicking title
-  $('body').on('click', 'a.board', function (e) {
-    e.preventDefault();
-    let url = this.href + "/outfits"
-    $.get(url, function(outfits) {
-       listOutfits(outfits);
-     });
-   });
+//////////////////////LISTENERS/////////////////////////
 
+function attachListenersForOutfits () {
    //list outfits under that hashtag
    $('body').on('click', 'a.tags', function (e) {
      e.preventDefault();
@@ -40,24 +33,21 @@ function attachListenersForOutfits () {
 
 }
 
+/////////////////////////HANDLERS////////////////////////////
+
 var listOutfits = (outfits) => {
   clear();
   if (outfits.length) {
     $('.col-lg-12').append('<h1>Outfits</h1>')
     outfits.forEach(function(outfit) {
-      createOutfitThumbnail(outfit);
+      var newOutfit = new Outfit(outfit)
+      $('.col-lg-12').append(newOutfit.createOutfitThumbnail());
     });
   } else {
     $('.col-lg-12').append('<h1>This board has no outfits</h1>')
   };
 };
 
-var createOutfitThumbnail = (outfit) => {
-  $('.col-lg-12').append(`<input type='image' class='outfit-thumbnail', src='${outfit.image.url}', data-id='${outfit.id}', onclick='showOutfit(this)'></input>`)
-  if (outfit.caption != null) {
-    $('.col-lg-12').append(`<p><font color="grey"><em>${outfit.caption}</em></font></p>`)
-  };
-};
 
 var showOutfit = (outfit) => {
   clear();
