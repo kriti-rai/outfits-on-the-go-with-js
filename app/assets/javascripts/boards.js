@@ -11,14 +11,8 @@ class Board {
     this.id = board.id;
     this.name = board.name;
     this.created_at = formatDate(board.created_at);
-    // if (this.user) {
-    //   this.user.id = board.user_id;
-    // } else if (this.user_id) {
-    //   this.user_id = board.user_id;
-    // }
     this.user_id = board.user_id;
-    // this.user = board.user;
-    // this.outfits = board.outfits;
+    this.outfits = board.outfits;
   }
 
   createBoardLinks() {
@@ -35,7 +29,7 @@ class Board {
         <button type="button" data-url="/boards/${this.id}" id="view-board" class="btn btn-info btn-sm">View</button>
       </h4>
       `
-    if (this.user.id === currentUID) {
+    if (this.user_id === currentUID) {
       return innerHTML + currentUserBoardsHTML
     } else {
     return innerHTML + userBoardsHTML;
