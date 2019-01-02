@@ -11,7 +11,8 @@ class Board {
     this.id = board.id;
     this.name = board.name;
     this.created_at = formatDate(board.created_at);
-    this.user_id = board.user_id;
+    this.user_id = board.user.id;
+    this.user = board.user;
     this.outfits = board.outfits;
   }
 
