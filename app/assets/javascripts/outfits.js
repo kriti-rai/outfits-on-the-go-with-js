@@ -90,7 +90,7 @@ var showOutfit = (outfit) => {
       var tagsHTML = tags.join(' ')
       var innerHTML = tagsLabel + tagsHTML + "</p>"
       $('.col-lg-12').append(innerHTML)
-      $('.col-lg-12').append("<p>Edit | Delete</p>")
+      $('.col-lg-12').append(`<button type="button" data-url="/outfits/${outfit.id}/edit" id="edit-outfit" class="btn btn-outline-secondary">Edit</button> <button type="button" data-url="/outfits/${outfit.id}" id="del-outfit" class="btn btn-outline-danger">Delete</button>`)
     };
   });
 };
@@ -109,6 +109,7 @@ var listTaggedOutfits = (tag) => {
 
 
 var createOutfit = (data) => {
+  //image not loading
   debugger
   $.ajax({
     url: data.action,
@@ -126,6 +127,14 @@ var updateOutfit = () => {
 
 };
 
-var deleteOutfit = () => {
-
+var deleteOutfit = (outfit) => {
+  $.ajax({
+    url: outfit.dataset.url,
+    type: "DELETE",
+    data: $(outfit).serialize(),
+    success: function(response) {
+      clear();
+      debugger
+    }
+  });
 };
