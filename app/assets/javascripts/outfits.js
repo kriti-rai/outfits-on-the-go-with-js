@@ -51,8 +51,8 @@ var listOutfits = (outfits) => {
 
 var showOutfit = (outfit) => {
   clear();
-  var url = `/outfits/${outfit.dataset.id}`
-  $.get(url, function (outfit) {
+  // var url = `/outfits/${outfit.dataset.id}`
+  // $.get(url, function (outfit) {
     $('.col-lg-12').append($('<img>', {class:'outfit-show', src:`${outfit.image.url}`}))
     if (outfit.hashtags) {
       var tagsLabel = "<p>Tags: "
@@ -64,7 +64,7 @@ var showOutfit = (outfit) => {
       var innerHTML = tagsLabel + tagsHTML + "</p>"
       $('.col-lg-12').append(innerHTML)
     };
-  });
+  // });
 };
 
 var listTaggedOutfits = (tag) => {
