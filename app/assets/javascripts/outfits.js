@@ -41,7 +41,7 @@ var listOutfits = (outfits) => {
     $('.col-lg-12').append('<h1>Outfits</h1>')
     outfits.forEach(function(outfit) {
       var newOutfit = new Outfit(outfit)
-      $('.col-lg-12').append(newOutfit.createOutfitThumbnail());
+      $('.col-lg-12').append(newOutfit.outfitHTML());
     });
   } else {
     $('.col-lg-12').append('<h1>This board has no outfits</h1>')
@@ -73,7 +73,7 @@ var listTaggedOutfits = (tag) => {
     if (outfits.length) {
       $('.col-lg-12').append(`<h1>#${tag.dataset.name}</h1>`)
       outfits.forEach(function(outfit) {
-        createOutfitThumbnail(outfit);
+        outfitHTML(outfit);
       });
     };
   });
