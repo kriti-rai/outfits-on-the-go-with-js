@@ -66,7 +66,6 @@ function attachListenersForOutfits () {
 
 var listOutfits = (outfits) => {
   if (outfits.length) {
-    $('.col-lg-12').append('<h1>Outfits</h1>')
     outfits.forEach(function(outfit) {
       var newOutfit = new Outfit(outfit)
       $('.col-lg-12').append(newOutfit.outfitHTML());
