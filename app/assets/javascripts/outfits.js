@@ -56,7 +56,7 @@ function attachListenersForOutfits () {
      });
 
    //  delete outfit
-    $('body').on('click', '#delete-outfit', function (e) {
+    $('body').on('click', '#del-outfit', function (e) {
       e.preventDefault();
       deleteOutfit(this)
      });
@@ -90,7 +90,9 @@ var showOutfit = (outfit) => {
       var tagsHTML = tags.join(' ')
       var innerHTML = tagsLabel + tagsHTML + "</p>"
       $('.col-lg-12').append(innerHTML)
-      $('.col-lg-12').append(`<button type="button" data-url="/outfits/${outfit.id}/edit" id="edit-outfit" class="btn btn-outline-secondary">Edit</button> <button type="button" data-url="/outfits/${outfit.id}" id="del-outfit" class="btn btn-outline-danger">Delete</button>`)
+    };
+    if (currentUID === outfit.user.id) {
+      $('.col-lg-12').append(`<br><br><button type="button" data-url="/outfits/${outfit.id}/edit" id="edit-outfit" class="btn btn-outline-secondary">Edit</button> <button type="button" data-url="/outfits/${outfit.id}" id="del-outfit" class="btn btn-outline-danger">Delete</button>`)
     };
   });
 };
@@ -124,7 +126,7 @@ var createOutfit = (data) => {
 };
 
 var updateOutfit = () => {
-
+  debugger
 };
 
 var deleteOutfit = (outfit) => {
@@ -134,7 +136,8 @@ var deleteOutfit = (outfit) => {
     data: $(outfit).serialize(),
     success: function(response) {
       clear();
-      debugger
+      let url = `/boards/${response.id}`
+      viewBoard(url);
     }
   });
 };
