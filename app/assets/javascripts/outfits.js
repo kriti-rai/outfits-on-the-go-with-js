@@ -65,7 +65,6 @@ function attachListenersForOutfits () {
 /////////////////////////HANDLERS////////////////////////////
 
 var listOutfits = (outfits) => {
-  clear();
   if (outfits.length) {
     $('.col-lg-12').append('<h1>Outfits</h1>')
     outfits.forEach(function(outfit) {
@@ -81,7 +80,6 @@ var showOutfit = (outfit) => {
   clear();
   var url = `/outfits/${outfit.dataset.id}`
   $.get(url, function (outfit) {
-    debugger
     $('.col-lg-12').append($('<img>', {class:'outfit-show', src:`${outfit.image.url}`}))
     if (outfit.hashtags) {
       var tagsLabel = "<p>Tags: "
@@ -111,7 +109,7 @@ var listTaggedOutfits = (tag) => {
 
 
 var createOutfit = () => {
-
+  debugger
 };
 
 var updateOutfit = () => {
