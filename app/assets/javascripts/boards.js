@@ -111,7 +111,7 @@ function viewBoard (url) {
   $.get(url, function(board) {
     let user = board.user;
     if (user.id === currentUID) {
-      $('.col-lg-12').append(`<button type="button" data-url="/boards/${board.id}/outfits/new" id="create-outfit" class="btn btn-success">Add Outfit</button>`)
+      $('.col-lg-12').append(`<h1>${board.name} <button type="button" data-url="/boards/${board.id}/outfits/new" id="create-outfit" class="btn btn-outline-success">Add Outfit</button></h1>`)
     }
      listOutfits(board.outfits);
    });
