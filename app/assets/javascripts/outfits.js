@@ -79,3 +79,16 @@ var listTaggedOutfits = (tag) => {
     };
   });
 };
+
+
+var createOutfit = () => {
+
+};
+
+var updateOutfit = () => {
+
+};
+
+var deleteOutfit = () => {
+
+};
