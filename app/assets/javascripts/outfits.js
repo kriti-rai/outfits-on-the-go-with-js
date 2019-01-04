@@ -108,8 +108,18 @@ var listTaggedOutfits = (tag) => {
 };
 
 
-var createOutfit = () => {
+var createOutfit = (data) => {
   debugger
+  $.ajax({
+    url: data.action,
+    type: "POST",
+    data: $(data).serialize(),
+    success: function(response) {
+      let outfit = new Board(response)
+      clear();
+      showOutfit(outfit)
+    }
+  });
 };
 
 var updateOutfit = () => {
