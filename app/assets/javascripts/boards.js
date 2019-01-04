@@ -42,19 +42,15 @@ function attachListenersForBoards() {
   //view board by clicking view
   $('body').on('click', '#view-board', function (e) {
     e.preventDefault();
-    let url = this.dataset.url + "/outfits"
-    $.get(url, function(outfits) {
-       listOutfits(outfits);
-     });
+    let url = this.dataset.url
+    viewBoard(url);
    });
 
    //view board by clicking title
   $('body').on('click', 'a.board', function (e) {
     e.preventDefault();
-    let url = this.href + "/outfits"
-    $.get(url, function(outfits) {
-       listOutfits(outfits);
-     });
+    let url = this.href
+    viewBoard(url);
    });
 
    //list current user's boards
@@ -110,12 +106,22 @@ var initializeBoards = () => {
   })
 }
 
+function viewBoard (url) {
+  clear();
+  $.get(url, function(board) {
+    let user = board.user;
+    if (user.id === currentUID) {
+      $('.col-lg-12').append('<button type="button" class="btn btn-success">Add Outfit</button>')
+    }
+     listOutfits(board.outfits);
+   });
+}
+
 function updateBoardsCollection (boards, board) {
   if (boards.indexOf(board) === -1) {
     boards.push(board);
   };
 };
-
 
 var listBoards = (uid,url) => {
   $.get(url, function(boards) {
