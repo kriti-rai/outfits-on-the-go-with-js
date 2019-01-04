@@ -72,7 +72,7 @@ var listOutfits = (outfits) => {
       $('.col-lg-12').append(newOutfit.outfitHTML());
     });
   } else {
-    $('.col-lg-12').append('<h1>This board has no outfits</h1>')
+    $('.col-lg-12').append('<h5>This board has no outfits</h5>')
   };
 };
 
