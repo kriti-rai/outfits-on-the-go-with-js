@@ -1,16 +1,18 @@
 class OutfitsController < ApplicationController
   before_action :require_login
   before_action :set_outfit, only: [:edit, :update, :index, :show, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:destroy, :update]
   helper_method :outfit_owner
 
   def new
     @outfit = Outfit.new(user: current_user, board: Board.find(params[:board_id]))
+    render layout: false
   end
 
   def create
     @outfit = Outfit.new(outfit_params)
     if @outfit.save
-      redirect_to @outfit
+      render json: @outfit
     else
       flash[:error] = @outfit.errors.full_messages[0]
       render 'new'
@@ -19,17 +21,17 @@ class OutfitsController < ApplicationController
 
   def edit
     if outfit_owner
-      render 'edit'
+      render layout: false
     else
       flash[:error] = "Permission denied"
-      redirect_to @outfit
+      render json: @outfit
     end
   end
 
   def update
     if @outfit.update(outfit_params)
       flash[:success] = "Post updated successfully"
-      redirect_to @outfit
+      render json: @outfit
     else
       render 'edit'
     end
@@ -38,26 +40,17 @@ class OutfitsController < ApplicationController
   def index
     @board = Board.find(params[:board_id])
     @outfits = @board.outfits
-    # respond_to do |format|
-    #   format.html { render :index }
-    #   format.json { render json: @users }
-    # end
-
     render json: @outfits
   end
 
   def show
     render json: @outfit
-    # respond_to do |format|
-    #   format.html { render :show }
-    #   format.json { render json: @outfit}
-    # end
   end
 
   def destroy
     if outfit_owner
       @outfit.destroy
-      redirect_to @outfit.board
+      render json: @outfit.board
     else
       flash[:error] = "Permission denied"
       redirect_to @outfit
