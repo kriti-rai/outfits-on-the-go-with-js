@@ -6,12 +6,12 @@ class Outfit {
   constructor(outfit) {
     this.id = outfit.id
     outfit.caption? (this.caption = outfit.caption) : false
-    this.tags = outfit.tags //outfit.hashtags?
+    this.hashtags = outfit.hashtags
     this.image = outfit.image
     this.board = outfit.board
     this.board_id = outfit.board.id
     this.user = outfit.user
-    this.user_id = outfit.board.user.id
+    this.user_id = outfit.user.id
   }
 
   outfitHTML () {
@@ -48,11 +48,11 @@ var listOutfits = (outfits) => {
   };
 };
 
-
 var showOutfit = (outfit) => {
   clear();
-  // var url = `/outfits/${outfit.dataset.id}`
-  // $.get(url, function (outfit) {
+  var url = `/outfits/${outfit.dataset.id}`
+  $.get(url, function (outfit) {
+    debugger
     $('.col-lg-12').append($('<img>', {class:'outfit-show', src:`${outfit.image.url}`}))
     if (outfit.hashtags) {
       var tagsLabel = "<p>Tags: "
@@ -63,8 +63,9 @@ var showOutfit = (outfit) => {
       var tagsHTML = tags.join(' ')
       var innerHTML = tagsLabel + tagsHTML + "</p>"
       $('.col-lg-12').append(innerHTML)
+      $('.col-lg-12').append("<p>Edit | Delete</p>")
     };
-  // });
+  });
 };
 
 var listTaggedOutfits = (tag) => {
