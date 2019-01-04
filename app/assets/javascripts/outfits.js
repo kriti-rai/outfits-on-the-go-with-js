@@ -38,7 +38,7 @@ function attachListenersForOutfits () {
    });
 
    // create outfit
-   $('body').on('submit', '#outfit', function (e) {
+   $('body').on('submit', '#new_outfit', function (e) {
      e.preventDefault();
      createOutfit(this)
     });
