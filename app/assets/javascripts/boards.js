@@ -56,7 +56,7 @@ function attachListenersForBoards() {
        listOutfits(outfits);
      });
    });
-   
+
    //list current user's boards
    $('body').on('click', '#my-boards', function (e) {
      e.preventDefault();
@@ -97,10 +97,10 @@ function attachListenersForBoards() {
 
 ////////////////////////HELPER FUNCTIONS////////////////////////////////
 
-var initializeBoards = (url) => {
+var initializeBoards = () => {
   $.get("/users", function (users) {
-    // debugger
     users.forEach(function (user) {
+      debugger
       if (user.boards.length) {
         user.boards.forEach(function(board) {
           let newBoard = new Board(board);
