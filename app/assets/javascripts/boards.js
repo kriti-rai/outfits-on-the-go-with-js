@@ -100,7 +100,6 @@ function attachListenersForBoards() {
 var initializeBoards = () => {
   $.get("/users", function (users) {
     users.forEach(function (user) {
-      debugger
       if (user.boards.length) {
         user.boards.forEach(function(board) {
           let newBoard = new Board(board);
