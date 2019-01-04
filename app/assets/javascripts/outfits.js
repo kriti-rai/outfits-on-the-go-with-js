@@ -31,6 +31,35 @@ function attachListenersForOutfits () {
      listTaggedOutfits(this);
     });
 
+    //render create form
+   $('body').on('click', '#create-outfit', function (e) {
+     e.preventDefault();
+     renderForm(this);
+   });
+
+   // create outfit
+   $('body').on('submit', '#outfit', function (e) {
+     e.preventDefault();
+     createOutfit(this)
+    });
+
+   // render edit form
+    $('body').on('click', '#edit-outfit', function (e) {
+      e.preventDefault();
+      renderForm(this);
+    });
+
+   // update outfit
+    $('body').on('submit', '.edit_outfit', function (e) {
+      e.preventDefault();
+      updateOutfit(this);
+     });
+
+   //  delete outfit
+    $('body').on('click', '#delete-outfit', function (e) {
+      e.preventDefault();
+      deleteOutfit(this)
+     });
 }
 
 /////////////////////////HANDLERS////////////////////////////
