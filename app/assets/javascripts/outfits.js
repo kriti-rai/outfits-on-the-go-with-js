@@ -18,7 +18,7 @@ class Outfit {
     let thumbnailHTML = `<input type='image' class='outfit-thumbnail', src='${this.image.url}', data-id='${this.id}', onclick='showOutfit(this)'></input>`
     let captionHTML
     (this.caption != null) ? captionHTML = `<p><font color="grey"><em>${this.caption}</em></font></p>` : false
-    return imgThumbnailHTML + captionHTML
+    return thumbnailHTML + captionHTML
   };
 }
 
