@@ -105,7 +105,6 @@ var showOutfit = (outfit) => {
     if (currentUID === outfit.user.id) {
       $('.col-lg-12').append(`<button type="button" data-url="/outfits/${outfit.id}/edit" id="edit-outfit" class="btn btn-outline-secondary">Edit</button> <button type="button" data-url="/outfits/${outfit.id}" id="del-outfit" class="btn btn-outline-danger">Delete</button>`)
     };
-    $('.col-lg-12').append(`<button data-url="/outfits/${outfit.id}/next" id="nextOutfit" class="btn btn-outline-secondary">Next</button>`)
 };
 
 var listTaggedOutfits = (tag) => {
