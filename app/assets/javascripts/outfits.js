@@ -105,11 +105,12 @@ var showOutfit = (outfit) => {
 
 var listTaggedOutfits = (tag) => {
   clear();
+  $('.col-lg-12').append(`<h1>#${tag.dataset.name}</h1>`)
   $.get(`/hashtags/${tag.dataset.name}`, function (outfits) {
     if (outfits.length) {
-      $('.col-lg-12').append(`<h1>#${tag.dataset.name}</h1>`)
-      outfits.forEach(function(outfit) {
-        outfitHTML(outfit);
+      outfits.forEach(function(o) {
+        let outfit = new Outfit(o)
+        $('.col-lg-12').append(outfit.outfitHTML());
       });
     };
   });
