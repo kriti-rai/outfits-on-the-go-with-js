@@ -49,7 +49,7 @@ function attachListenersForOutfits () {
    // create outfit
    $('body').on('submit', '#new_outfit', function (e) {
      e.preventDefault();
-     createOutfit(this);
+     createUpdateOutfit(this);
    });
 
 
@@ -62,7 +62,7 @@ function attachListenersForOutfits () {
    // update outfit
     $('body').on('submit', '.edit_outfit', function (e) {
       e.preventDefault();
-      updateOutfit(this);
+      createUpdateOutfit(this);
      });
 
    //  delete outfit
@@ -117,11 +117,11 @@ var listTaggedOutfits = (tag) => {
 };
 
 
-var createOutfit = (form) => {
+var createUpdateOutfit = (form) => {
   var fd = new FormData($('form')[0])
   $.ajax({
     url: form.action,
-    type: "POST",
+    type: ($("input[name='_method']").val() || form.method),
     data: fd,
     cache: false,
     contentType: false,
@@ -131,10 +131,6 @@ var createOutfit = (form) => {
       showOutfit(resp);
     }
     });
-};
-
-var updateOutfit = () => {
-  debugger
 };
 
 var deleteOutfit = (outfit) => {
