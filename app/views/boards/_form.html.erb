@@ -2,5 +2,5 @@
   Name: <%=f.text_field :name %><br>
   <%= f.hidden_field :user_id, value: current_user.id %>
   <br>
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-outline-primary"%>
 <% end %>
