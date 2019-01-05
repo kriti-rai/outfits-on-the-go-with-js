@@ -40,8 +40,9 @@ function attachListenersForOutfits () {
    // create outfit
    $('body').on('submit', '#new_outfit', function (e) {
      e.preventDefault();
-     createOutfit(this)
-    });
+     createOutfit(this);
+   });
+
 
    // render edit form
     $('body').on('click', '#edit-outfit', function (e) {
@@ -109,19 +110,21 @@ var listTaggedOutfits = (tag) => {
 };
 
 
-var createOutfit = (data) => {
-  //image not loading
-  debugger
+var createOutfit = (form) => {
+  var fd = new FormData($('form')[0])
   $.ajax({
-    url: data.action,
+    url: form.action,
     type: "POST",
-    data: $(data).serialize(),
-    success: function(response) {
-      let outfit = new Board(response)
+    data: fd,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(resp) {
+      let outfit = new Outfit(resp);
       clear();
-      showOutfit(outfit)
+      $('.col-lg-12').append($('<img>', {class:'outfit-show', src:`${resp.image.url}`}))
     }
-  });
+    });
 };
 
 var updateOutfit = () => {
