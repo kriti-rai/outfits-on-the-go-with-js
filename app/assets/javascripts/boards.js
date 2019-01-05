@@ -99,7 +99,7 @@ var initializeBoards = () => {
       if (user.boards.length) {
         user.boards.forEach(function(board) {
           let newBoard = new Board(board);
-          updateBoardsCollection(boards, newBoard);
+          updateBoardsCollection(boardsCollection, newBoard);
         })
       }
     });
@@ -118,8 +118,8 @@ function viewBoard (url) {
 }
 
 function updateBoardsCollection (boards, board) {
-  if (boards.indexOf(board) === -1) {
-    boards.push(board);
+  if (boardsCollection.indexOf(board) === -1) {
+    boardsCollection.push(board);
   };
 };
 
