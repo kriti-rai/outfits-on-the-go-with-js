@@ -44,19 +44,7 @@ function attachListenersForUsers() {
   // edit Account
   $('body').on('submit', '.edit_user', function (e) {
     e.preventDefault();
-    debugger // come back to this
-    //image not loading/updating
-    //does not render the current image either
-    //"/uploads/user/image/13/mac.jpg" image src is still the same
-    $.ajax({
-      url: this.action,
-      type: "PATCH",
-      data: $(this).serialize(),
-      success: function(response) {
-        debugger
-        showCurrentUser(response)
-      }
-    });
+    createUpdateUser(this)
   });
 
   //delete account
@@ -78,6 +66,22 @@ function attachListenersForUsers() {
 };
 
 ////////////////////////////HELPER FUNCTIONS///////////////////////////
+
+var createUpdateUser = (form) => {
+  var fd = new FormData($('form')[0])
+  $.ajax({
+    url: form.action,
+    type: ($("input[name='_method']").val() || form.method),
+    data: fd,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(resp) {
+      clear();
+      showCurrentUser(resp);
+    }
+    });
+};
 
 var deleteAction = (data) => {
   $.ajax({
