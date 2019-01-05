@@ -15,7 +15,7 @@ class Outfit {
   }
 
   outfitHTML () {
-    let thumbnailHTML = `<input type='image' class='outfit-thumbnail', src='${this.image.url}', data-id='${this.id}', onclick='showOutfit(this)'></input>`
+    let thumbnailHTML = `<input type='image' class='outfit-thumbnail', src='${this.image.url}', data-id='${this.id}'></input>`
     let captionHTML
     (this.caption != null) ? captionHTML = `<p><font color="grey"><em>${this.caption}</em></font></p>` : false
     return thumbnailHTML + captionHTML
@@ -30,6 +30,15 @@ function attachListenersForOutfits () {
      e.preventDefault();
      listTaggedOutfits(this);
     });
+
+    //show outfit page
+   $('body').on('click', '.outfit-thumbnail', function (e) {
+     e.preventDefault();
+     var url = `/outfits/${this.dataset.id}`
+     $.get(url, function (outfit) {
+       showOutfit(outfit);
+     });
+   });
 
     //render create form
    $('body').on('click', '#create-outfit', function (e) {
@@ -78,8 +87,6 @@ var listOutfits = (outfits) => {
 
 var showOutfit = (outfit) => {
   clear();
-  var url = `/outfits/${outfit.dataset.id}`
-  $.get(url, function (outfit) {
     $('.col-lg-12').append($('<img>', {class:'outfit-show', src:`${outfit.image.url}`}))
     if (outfit.hashtags) {
       var tagsLabel = "<p>Tags: "
@@ -94,7 +101,6 @@ var showOutfit = (outfit) => {
     if (currentUID === outfit.user.id) {
       $('.col-lg-12').append(`<br><br><button type="button" data-url="/outfits/${outfit.id}/edit" id="edit-outfit" class="btn btn-outline-secondary">Edit</button> <button type="button" data-url="/outfits/${outfit.id}" id="del-outfit" class="btn btn-outline-danger">Delete</button>`)
     };
-  });
 };
 
 var listTaggedOutfits = (tag) => {
@@ -120,9 +126,8 @@ var createOutfit = (form) => {
     contentType: false,
     processData: false,
     success: function(resp) {
-      let outfit = new Outfit(resp);
       clear();
-      $('.col-lg-12').append($('<img>', {class:'outfit-show', src:`${resp.image.url}`}))
+      showOutfit(resp);
     }
     });
 };
