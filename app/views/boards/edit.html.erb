@@ -1,7 +1,5 @@
 <div class="login-form">
   <h1>Edit Board</h1>
-
   <%= render partial: 'form', locals: {board: @board, url: board_path(@board), method: "patch"} %>
-
-  <div class= "button"><%= link_to "Cancel", @board %></div>
 </div>
+<div><%= link_to "Cancel", @board, {class: "btn btn-outline-secondary", id: "cancel-edit"} %></div>
