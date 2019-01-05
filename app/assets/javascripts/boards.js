@@ -4,7 +4,7 @@ $(document).on('turbolinks:load', function() {
   attachListenersForBoards();
 });
 
-let boards = [];
+const boardsCollection = [];
 
 class Board {
   constructor(board) {
