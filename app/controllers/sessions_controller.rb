@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   def new
     if logged_in?
       @user = current_user
-      render json: @user
+      redirect_to feed_path
     else
       render 'new'
     end
