@@ -88,9 +88,8 @@ var listOutfits = (outfits) => {
 var showOutfit = (outfit) => {
   clear();
     if (outfit.caption) {
-      $('.col-lg-12').append(`<h5 class="caption">${outfit.caption}</h5>`)
+      $('.col-lg-12').append(`<h5 class="caption">${outfit.caption}</h5><br>`)
     }
-
     $('.col-lg-12').append($('<img>', {class:'outfit-show', src:`${outfit.image.url}`}))
     if (outfit.hashtags) {
       var tagsLabel = "<p>Tags: "
@@ -102,8 +101,9 @@ var showOutfit = (outfit) => {
       var innerHTML = tagsLabel + tagsHTML + "</p>"
       $('.col-lg-12').append(innerHTML)
     };
+    $('.col-lg-12').append(`<br><button type="button" data-url="/boards/${outfit.board.id}" class="btn btn-outline-secondary" onclick="viewBoard(this.dataset.url)">Back</button> `)
     if (currentUID === outfit.user.id) {
-      $('.col-lg-12').append(`<br><br><button type="button" data-url="/outfits/${outfit.id}/edit" id="edit-outfit" class="btn btn-outline-secondary">Edit</button> <button type="button" data-url="/outfits/${outfit.id}" id="del-outfit" class="btn btn-outline-danger">Delete</button>`)
+      $('.col-lg-12').append(`<button type="button" data-url="/outfits/${outfit.id}/edit" id="edit-outfit" class="btn btn-outline-secondary">Edit</button> <button type="button" data-url="/outfits/${outfit.id}" id="del-outfit" class="btn btn-outline-danger">Delete</button>`)
     };
 };
 
