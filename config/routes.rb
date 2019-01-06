@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get '/hashtags', to: 'tags#index', as: :hashtags
   get '/hashtags/:hashtag', to: 'tags#show', as: :hashtag
 
-  get '/outfits-on-the-go' => 'boards#feed', as: :feed
+  get '/feed' => 'boards#feed', as: :feed
+
+  get '/outfits-on-the-go' => 'static#welcome', as: :home
 
 
   get '/sortedtags' => 'tags#sorted_tags'
