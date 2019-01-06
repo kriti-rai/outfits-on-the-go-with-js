@@ -15,7 +15,7 @@ class Outfit {
   }
 
   outfitHTML () {
-    let thumbnailHTML = `<input type='image' class='outfit-thumbnail', src='${this.image.url}', data-id='${this.id}'></input>`
+    let thumbnailHTML = `<br><br><p><input type='image' class='outfit-thumbnail', src='${this.image.url}', data-id='${this.id}'></input></p>`
     return (this.caption != null) ? thumbnailHTML + `<p><font color="grey"><em>${this.caption}</em></font></p>` : thumbnailHTML
   };
 }
