@@ -63,6 +63,13 @@ function attachListenersForUsers() {
     deleteAction(this);
   });
 
+  $('body').on('click', '.feed-user', function (e) {
+    e.preventDefault();
+  })
+
+  $('body').on('click', '.feed-board', function (e) {
+    e.preventDefault();
+  })
 };
 
 ////////////////////////////HELPER FUNCTIONS///////////////////////////
@@ -104,10 +111,10 @@ var listUsers = (data) => {
     clear();
     users.forEach(function(user) {
       if (user.image.url === null) {
-        $('.col-lg-12').append(`<input type='image' class='user-thumbnail', src="/assets/no_image.png", data-id='${user.id}', onclick='showUser(this)'></input>`)
+        $('.col-lg-12').append(`<input type='image' class='user-thumbnail', src="/assets/no_image.png", onclick='showUser("users/${user.id}")'></input>`)
       } else {
         var img = new Image();
-        $('.col-lg-12').append(`<input type='image' class='user-thumbnail', src='${user.image.url}', data-id='${user.id}', onclick='showUser(this)'></input>`)
+        $('.col-lg-12').append(`<input type='image' class='user-thumbnail', src='${user.image.url}', onclick='showUser("users/${user.id}")'></input>`)
       }
       $('.col-lg-12').append($(`<div class="figcaption">${user.username}</div>`))
     });
@@ -141,8 +148,7 @@ let url = "/users/${user.id}/boards"
 }
 
 
-var showUser = (user) => {
-  var url= `/users/${user.dataset.id}`
+var showUser = (url) => {
   $.get(url, function(user) {
     clear();
     userHTML(user);
@@ -156,7 +162,7 @@ var showFeed = (url) => {
     $.getJSON(url, function(boards) {
       boards.forEach((b) => {
         let board = new Board(b)
-        $('.col-lg-12').append(`<p><a href="#" data-url="/users/${board.user_id}">${board.user.username}</a> created <a href="#" data-url="/boards/${board.id}">${board.name}</a> on ${board.created_at}</p>`)
+        $('.col-lg-12').append(`<p><a href="#" class="feed-user" onclick='showUser("/users/${board.user_id}")'>${board.user.username}</a> created <a href="#" class="feed-board" onclick='viewBoard("/boards/${board.id}")'>${board.name}</a> on ${board.created_at}</p>`)
       })
     })
 };
