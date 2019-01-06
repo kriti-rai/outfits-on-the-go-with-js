@@ -1,5 +1,8 @@
 
 $(document).on('turbolinks:load', function() {
+  // if (currentUID) {
+  //   setTimeout(initializeBoards(), 3000);
+  // }
   initializeBoards();
   attachListenersForBoards();
 });
@@ -15,7 +18,7 @@ class Board {
     this.user = board.user;
     this.outfits = board.outfits;
   }
-
+  //Board.prototype.renderForm() (static function)
   createBoardLinks() {
     let innerHTML = "<br><h4>"
     let currentUserBoardsHTML = `
@@ -93,18 +96,44 @@ function attachListenersForBoards() {
 
 ////////////////////////HELPER FUNCTIONS////////////////////////////////
 
+// var initializeBoards = () => {
+//   // debugger
+//   $.get("/users")
+//   .done(function (users) {
+//     console.log(users)
+//     users.forEach(function (user) {
+//       if (user.boards.length) {
+//         user.boards.forEach(function(board) {
+//           let newBoard = new Board(board);
+//           updateBoardsCollection(newBoard);
+//         })
+//       }
+//     });
+//   })
+  // $.get("/users")
+  //   .done(function(data) {
+  //     debugger
+  //   })
+// }
+
 var initializeBoards = () => {
   $.get("/users", function (users) {
     users.forEach(function (user) {
       if (user.boards.length) {
         user.boards.forEach(function(board) {
           let newBoard = new Board(board);
-          updateBoardsCollection(boardsCollection, newBoard);
+          updateBoardsCollection(newBoard);
         })
       }
     });
   })
 }
+
+function updateBoardsCollection (board) {
+  if (boardsCollection.indexOf(board) === -1) {
+    boardsCollection.push(board);
+  };
+};
 
 function viewBoard (url) {
   clear();
@@ -116,12 +145,6 @@ function viewBoard (url) {
      listOutfits(board.outfits);
    });
 }
-
-function updateBoardsCollection (boards, board) {
-  if (boardsCollection.indexOf(board) === -1) {
-    boardsCollection.push(board);
-  };
-};
 
 var listBoards = (uid,url) => {
   $.get(url, function(boards) {
