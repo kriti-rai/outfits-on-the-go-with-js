@@ -1,5 +1,33 @@
 
 @import "bootstrap";
+@import url(https://fonts.googleapis.com/css?family=Seaweed+Script);
+@import url(https://fonts.googleapis.com/css?family=Monoton);
+@import url(https://fonts.googleapis.com/css?family=Abel);
+
+
+
+.static h1 {
+  font-size: 65px;
+  font-weight: 900;
+  color: #FCF3CF;
+  white-space: nowrap;
+  display: inline-block;
+  position: relative;
+  letter-spacing: .1em;
+  padding: .2em 0 .25em 0;
+}
+
+.static p {
+  font-size: 25px;
+  font-family: "Abel", "sans-serif";
+  color: grey;
+}
+
+img.suitcase {
+  width: 420px;
+  height: auto;
+  float: none;
+}
 
 img.user-show {
   width: 200px;
