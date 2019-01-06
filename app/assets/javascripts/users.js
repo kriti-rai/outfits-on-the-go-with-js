@@ -29,7 +29,7 @@ function attachListenersForUsers() {
   //show feed
   $('#feed').on('click', function(e) {
     e.preventDefault();
-    showFeed(this);
+    showFeed(this.href);
   });
 
   //render edit form
@@ -150,10 +150,13 @@ var showUser = (user) => {
   });
 };
 
-var showFeed = () => {
+var showFeed = (url) => {
     clear();
-    $('.col-lg-12').append('<h1>Feed</h1><br>')
-    boardsCollection.forEach(function(board) {
-      $('.col-lg-12').append(`<p><a href="#" data-url="/users/${board.user_id}">${board.user.username}</a> created <a href="#" data-url="/boards/${board.id}">${board.name}</a> on ${board.created_at}</p>`)
+    $('.col-lg-12').append('<br><br><h1 class-"display-1">Feed</h1><hr>');
+    $.getJSON(url, function(boards) {
+      boards.forEach((b) => {
+        let board = new Board(b)
+        $('.col-lg-12').append(`<p><a href="#" data-url="/users/${board.user_id}">${board.user.username}</a> created <a href="#" data-url="/boards/${board.id}">${board.name}</a> on ${board.created_at}</p>`)
+      })
     })
 };
