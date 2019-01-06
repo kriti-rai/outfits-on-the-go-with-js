@@ -88,6 +88,12 @@ function attachListenersForBoards() {
       e.preventDefault();
       deleteBoard(this)
      });
+
+     //cancel edit
+     $('body').on('click', '.cancel-edit-board', function (e) {
+       e.preventDefault();
+       viewBoard(this.href);
+     })
 };
 
 ////////////////////////HELPER FUNCTIONS////////////////////////////////
