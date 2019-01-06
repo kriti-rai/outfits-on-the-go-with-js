@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
 
   get '/users/:id/next', to: 'users#next'
+  get '/users/cuid', to: 'sessions#current_uid'
 
   resources :users do
     resources :boards , shallow: true do
