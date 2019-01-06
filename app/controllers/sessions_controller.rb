@@ -33,6 +33,10 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
 
+  def current_uid
+  render json: session[:user_id]
+  end
+
   private
     def auth
       request.env['omniauth.auth']
