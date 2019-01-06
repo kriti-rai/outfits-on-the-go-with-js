@@ -3,8 +3,6 @@ $(document).on('turbolinks:load', function() {
   attachListenersForBoards();
 });
 
-const boardsCollection = [];
-
 class Board {
   constructor(board) {
     this.id = board.id;
@@ -98,33 +96,16 @@ function attachListenersForBoards() {
 
 ////////////////////////HELPER FUNCTIONS////////////////////////////////
 
-var initializeBoards = () => {
-  $.get("/users", function (users) {
-    users.forEach(function (user) {
-      if (user.boards.length) {
-        user.boards.forEach(function(board) {
-          let newBoard = new Board(board);
-          updateBoardsCollection(newBoard);
-        })
-      }
-    });
-  })
-}
-
-function updateBoardsCollection (board) {
-  if (boardsCollection.indexOf(board) === -1) {
-    boardsCollection.push(board);
-  };
-};
-
 function viewBoard (url) {
   clear();
   $.get(url, function(board) {
+    $('.col-lg-12').append(`<h1>${board.name}`);
     let user = board.user;
     if (user.id === currentUID) {
-      $('.col-lg-12').append(`<h1>${board.name} <button type="button" data-url="/boards/${board.id}/outfits/new" id="create-outfit" class="btn btn-outline-success">Add Outfit</button></h1>`)
+      $('.col-lg-12').append(`<button type="button" data-url="/boards/${board.id}/outfits/new" id="create-outfit" class="btn btn-outline-success">Add Outfit</button></h1> | `)
     }
-     listOutfits(board.outfits);
+    $('.col-lg-12').append(`<button type="button" data-url="/users/boards/${board.id}" id="back-boards" class="btn btn-outline-success">Back</button></h1>`)
+   listOutfits(board.outfits);
    });
 }
 
