@@ -1,9 +1,5 @@
 
 $(document).on('turbolinks:load', function() {
-  // if (currentUID) {
-  //   setTimeout(initializeBoards(), 3000);
-  // }
-  initializeBoards();
   attachListenersForBoards();
 });
 
@@ -95,26 +91,6 @@ function attachListenersForBoards() {
 };
 
 ////////////////////////HELPER FUNCTIONS////////////////////////////////
-
-// var initializeBoards = () => {
-//   // debugger
-//   $.get("/users")
-//   .done(function (users) {
-//     console.log(users)
-//     users.forEach(function (user) {
-//       if (user.boards.length) {
-//         user.boards.forEach(function(board) {
-//           let newBoard = new Board(board);
-//           updateBoardsCollection(newBoard);
-//         })
-//       }
-//     });
-//   })
-  // $.get("/users")
-  //   .done(function(data) {
-  //     debugger
-  //   })
-// }
 
 var initializeBoards = () => {
   $.get("/users", function (users) {
@@ -223,7 +199,6 @@ var editBoard = (data) => {
     }
   });
 };
-
 
 var clear = () => {$('.col-lg-12').empty()};
 
