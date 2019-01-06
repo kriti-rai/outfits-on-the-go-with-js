@@ -15,7 +15,7 @@ function attachListenersForUsers() {
   //shows current user's page
   $('#current-user').on('click', function(e) {
     e.preventDefault();
-    $.getJSON(`${this.href}`, function(user) {
+    $.get(`${this.href}`, function(user) {
       showCurrentUser(user);
     });
   });
@@ -25,6 +25,20 @@ function attachListenersForUsers() {
     e.preventDefault();
     showNextUser(this);
   });
+
+  //signin
+  // $('body').on('submit', '#new_user', function (e) {
+  //   e.preventDefault();
+  //   // initializeBoards();
+  //   createUser(this)
+  // });
+  // //
+  // $('body').on('submit', '#signin', function (e) {
+  //   // e.preventDefault();
+  //   // debugger
+  //   // initializeBoards()
+  //   createUser(this)
+  // });
 
   //show feed
   $('#feed').on('click', function(e) {
@@ -83,6 +97,24 @@ var createUpdateUser = (form) => {
     });
 };
 
+var createUser = (form) => {
+  // var fd = new FormData($('form')[0])
+  debugger
+  $.ajax({
+    url: form.action,
+    type: "POST",
+    data: $(form).serialize(),
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(resp) {
+      clear();
+      getCurrentUID();
+      showFeed();
+    }
+    });
+};
+
 var deleteAction = (data) => {
   $.ajax({
     url: data.href,
@@ -94,8 +126,8 @@ var deleteAction = (data) => {
 };
 
 var getCurrentUID = () => {
-  $.getJSON("/signin", function(data) {
-    currentUID = data.id
+  $.get("/users/cuid", function(id) {
+    currentUID = parseInt(id)
   })
 };
 
@@ -143,17 +175,17 @@ let url = "/users/${user.id}/boards"
 
 var showUser = (user) => {
   var url= `/users/${user.dataset.id}`
-  $.getJSON(url, function(user) {
+  $.get(url, function(user) {
     clear();
     userHTML(user);
     $('.col-lg-12').append(`<p><button data-url="/users/${user.id}/next" id="nextUser" class="button">Next User</button></p>`)
   });
 };
 
-var showFeed = (data) => {
+var showFeed = () => {
     clear();
     $('.col-lg-12').append('<h1>Feed</h1><br>')
-    boards.forEach(function(board) {
-      $('.col-lg-12').append(`<p><a href="#" data-url="/users/${board.user_id}">${board.user.username}</a> created <a href="#" data-url="/boards/${board.id}">${board.name}</a> on ${formatDate(board.created_at)}</p>`)
+    boardsCollection.forEach(function(board) {
+      $('.col-lg-12').append(`<p><a href="#" data-url="/users/${board.user_id}">${board.user.username}</a> created <a href="#" data-url="/boards/${board.id}">${board.name}</a> on ${board.created_at}</p>`)
     })
 };
