@@ -26,20 +26,6 @@ function attachListenersForUsers() {
     showNextUser(this);
   });
 
-  //signin
-  // $('body').on('submit', '#new_user', function (e) {
-  //   e.preventDefault();
-  //   // initializeBoards();
-  //   createUser(this)
-  // });
-  // //
-  // $('body').on('submit', '#signin', function (e) {
-  //   // e.preventDefault();
-  //   // debugger
-  //   // initializeBoards()
-  //   createUser(this)
-  // });
-
   //show feed
   $('#feed').on('click', function(e) {
     e.preventDefault();
@@ -93,24 +79,6 @@ var createUpdateUser = (form) => {
     success: function(resp) {
       clear();
       showCurrentUser(resp);
-    }
-    });
-};
-
-var createUser = (form) => {
-  // var fd = new FormData($('form')[0])
-  debugger
-  $.ajax({
-    url: form.action,
-    type: "POST",
-    data: $(form).serialize(),
-    cache: false,
-    contentType: false,
-    processData: false,
-    success: function(resp) {
-      clear();
-      getCurrentUID();
-      showFeed();
     }
     });
 };
