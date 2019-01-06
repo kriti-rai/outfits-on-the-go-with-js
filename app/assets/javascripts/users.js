@@ -70,6 +70,11 @@ function attachListenersForUsers() {
   $('body').on('click', '.feed-board', function (e) {
     e.preventDefault();
   })
+
+  $('body').on('click', '.cancel-edit-account', function (e) {
+    e.preventDefault();
+    showUser(this.href);
+  })
 };
 
 ////////////////////////////HELPER FUNCTIONS///////////////////////////
