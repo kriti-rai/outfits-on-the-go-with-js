@@ -98,7 +98,7 @@ function attachListenersForBoards() {
 var viewBoard = (url) => {
   clear();
   $.get(url, function(board) {
-    $('.col-lg-12').prepend(`<span class="display-2">${board.name}</span><br><br><button type="button" data-url="/users/${board.user.id}/boards" id="back-boards" onclick="listBoards(${board.user.id}, this.dataset.url)" class="btn btn-outline-secondary">Back</button> `);
+    $('.col-lg-12').prepend(`<span class="page-header">${board.name}</span><br><br><button type="button" data-url="/users/${board.user.id}/boards" id="back-boards" onclick="listBoards(${board.user.id}, this.dataset.url)" class="btn btn-outline-secondary">Back</button> `);
     let user = board.user;
     if (user.id === currentUID) {
       $('.col-lg-12').append(`<button type="button" data-url="/boards/${board.id}/outfits/new" id="create-outfit" class="btn btn-outline-secondary">Add Outfit</button> `)
@@ -114,9 +114,9 @@ var listBoards = (uid,url) => {
       clear();
       if (boards.length) {
         if (uid === currentUID) {
-          $('.col-lg-12').append(`<p class="page-header"> My Boards</p><button type="button" data-url="/users/${currentUID}/boards/new" id="create-board" class="btn btn-outline-secondary">+ Create Board</button><br><br>`)
+          $('.col-lg-12').append(`<p class="page-header">My Boards</p><button type="button" data-url="/users/${currentUID}/boards/new" id="create-board" class="btn btn-success btn-sm">Create a board</button><br>`)
         } else {
-          $('.col-lg-12').append(`<h1>${user.username}'s Boards</h1>`)
+          $('.col-lg-12').append(`<p class="page-header">${user.username}'s Boards</p>`)
         }
         boards.forEach(function(board) {
           let newBoard = new Board(board);
