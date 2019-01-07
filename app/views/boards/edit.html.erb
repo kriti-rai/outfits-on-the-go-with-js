@@ -2,5 +2,5 @@
   <h1>Edit Board</h1>
   <%= render partial: 'form', locals: {board: @board, url: board_path(@board), method: "patch"} %>
   <br>
-  <%= link_to "Cancel", @board, {class: "cancel-edit-board"} %>
+  <%= link_to "Cancel", user_boards_path(@board.user), {class: "cancel-edit-board"} %>
 </div>
