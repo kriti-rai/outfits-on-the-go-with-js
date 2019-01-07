@@ -89,7 +89,7 @@ function attachListenersForBoards() {
      //cancel edit
      $('body').on('click', '.cancel-edit-board', function (e) {
        e.preventDefault();
-       viewBoard(this.href);
+       listBoards(currentUID, this.href);
      })
 };
 
