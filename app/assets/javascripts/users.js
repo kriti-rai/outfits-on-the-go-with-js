@@ -35,10 +35,7 @@ function attachListenersForUsers() {
   //render edit form
   $('#edit-account').on('click', function(e) {
     e.preventDefault();
-    $.get(this.href, function(editForm) {
-      clear();
-      $('.col-lg-12').append(editForm)
-    })
+    renderForm(this.href)
   });
 
   // edit Account
