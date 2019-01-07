@@ -7,12 +7,12 @@ class Board {
   constructor(board) {
     this.id = board.id;
     this.name = board.name;
-    this.created_at = formatDate(board.created_at);
+    this.created_at = board.created_at;
     this.user_id = board.user.id;
     this.user = board.user;
     this.outfits = board.outfits;
   }
-  //Board.prototype.renderForm() (static function)
+
   createBoardLinks() {
     let innerHTML = "<br><h4>"
     let currentUserBoardsHTML = `
@@ -187,24 +187,3 @@ var editBoard = (data) => {
 };
 
 var clear = () => {$('.col-lg-12').empty()};
-
-var formatDate = (created_at) => {
-  let date = new Date(created_at)
-  let m = date.getMonth() + 1;
-  if (m < 10) {
-    var month = "0"+ m.toString();
-  } else {
-    var month = m.toString();
-  };
-  let d = date.getDate();
-  if (d < 10) {
-    var day = "0"+ d.toString();
-  } else {
-    var day = d.toString();
-  };
-  let year = (date.getFullYear()).toString();
-
-  let formattedDateString = month + "/" + day + "/" + year
-
-  return formattedDateString;
-}
