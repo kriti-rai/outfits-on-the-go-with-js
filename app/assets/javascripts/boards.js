@@ -96,7 +96,7 @@ function attachListenersForBoards() {
 
 ////////////////////////HELPER FUNCTIONS////////////////////////////////
 
-function viewBoard (url) {
+var viewBoard = (url) => {
   clear();
   $.get(url, function(board) {
     $('.col-lg-12').prepend(`<span class="display-2">${board.name}</span><br><br><button type="button" data-url="/users/${board.user.id}/boards" id="back-boards" onclick="listBoards(${board.user.id}, this.dataset.url)" class="btn btn-outline-secondary">Back</button> `);
