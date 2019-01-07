@@ -9,8 +9,8 @@
     <%= f.hidden_field :user_id %>
     <%= f.hidden_field :board_id  %>
 
-    <%= f.submit class: "btn btn-primary btn-sm"%>
+    <%= f.submit class: "btn btn-outline-secondary"%>
   </div>
+  <p id="cancel-create-outfit"><%= link_to "Cancel", @board%></p>
 <% end %>
 <br>
-<div class="button"><%= link_to "Go Back", user_boards_path(current_user)%></div>
