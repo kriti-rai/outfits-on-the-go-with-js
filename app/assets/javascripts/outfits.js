@@ -54,7 +54,7 @@ function attachListenersForOutfits () {
    // render edit form
     $('body').on('click', '#edit-outfit', function (e) {
       e.preventDefault();
-      renderForm(this);
+      renderForm(this.dataset.url);
     });
 
    // update outfit
