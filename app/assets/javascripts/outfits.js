@@ -15,7 +15,7 @@ class Outfit {
   }
 
   outfitHTML () {
-    let thumbnailHTML = `<br><br><p><input type='image' class='outfit-thumbnail', src='${this.image.url}', data-id='${this.id}'></input></p>`
+    let thumbnailHTML = `<p><input type='image' class='outfit-thumbnail', src='${this.image.url}', data-id='${this.id}'></input></p>`
     return (this.caption != null) ? thumbnailHTML + `<p><font color="grey"><em>${this.caption}</em></font></p>` : thumbnailHTML
   };
 }
@@ -73,13 +73,14 @@ function attachListenersForOutfits () {
 /////////////////////////HANDLERS////////////////////////////
 
 var listOutfits = (outfits) => {
+  $('.col-lg-12').append('<br><br>')
   if (outfits.length) {
     outfits.forEach(function(outfit) {
       var newOutfit = new Outfit(outfit)
       $('.col-lg-12').append(newOutfit.outfitHTML());
     });
   } else {
-    $('.col-lg-12').append('<h5>This board has no outfits</h5>')
+    $('.col-lg-12').append('<br><div class="empty-msg">This board currently has no outfits</div>')
   };
 };
 
