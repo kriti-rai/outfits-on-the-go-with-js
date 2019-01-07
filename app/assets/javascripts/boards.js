@@ -59,7 +59,7 @@ function attachListenersForBoards() {
    //render create form
    $('body').on('click', '#create-board', function (e) {
      e.preventDefault();
-     renderForm(this);
+     renderForm(this.dataset.url);
    });
 
    //create board
