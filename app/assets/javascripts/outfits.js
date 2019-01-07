@@ -16,7 +16,7 @@ class Outfit {
 
   outfitHTML () {
     let thumbnailHTML = `<p><input type='image' class='outfit-thumbnail', src='${this.image.url}', data-id='${this.id}'></input></p>`
-    return (this.caption != null) ? thumbnailHTML + `<p><font color="grey"><em>${this.caption}</em></font></p>` : thumbnailHTML
+    return (this.caption != null) ? thumbnailHTML + `<p><class="caption">${this.caption}</p>` : thumbnailHTML
   };
 }
 
@@ -90,14 +90,13 @@ var showOutfit = (outfit) => {
       $('.col-lg-12').append(`<h5 class="caption">${outfit.caption}</h5><br>`)
     }
     $('.col-lg-12').append($('<img>', {class:'outfit-show', src:`${outfit.image.url}`}))
-    if (outfit.hashtags) {
-      var tagsLabel = "<br><br><p>Tags: "
-      var tags = []
+    if (outfit.hashtags != null) {
+      let tags = []
       outfit.tags.forEach(function(tag) {
-        tags.push(`#<a href='#' class="tags" data-id= "${tag.id}" data-name="${tag.name}">${tag.name}</a>`)
+        tags.push(`#<a href='#' style= "color: grey" class="tags" data-id= "${tag.id}" data-name="${tag.name}">${tag.name}</a>`)
       });
-      var tagsHTML = tags.join(' ')
-      var innerHTML = tagsLabel + tagsHTML + "</p>"
+      let tagsHTML = tags.join(' ')
+      let innerHTML = '<br><br><p class="hashtags">Tags: ' + tagsHTML + '</p>'
       $('.col-lg-12').append(innerHTML)
     };
     $('.col-lg-12').append(`<br><button type="button" data-url="/boards/${outfit.board.id}" class="btn btn-outline-secondary" onclick="viewBoard(this.dataset.url)">Back</button> `)
@@ -118,7 +117,6 @@ var listTaggedOutfits = (tag) => {
     };
   });
 };
-
 
 var createUpdateOutfit = (form) => {
   let fd = new FormData($('form')[0])
