@@ -121,7 +121,7 @@ var listTaggedOutfits = (tag) => {
 
 
 var createUpdateOutfit = (form) => {
-  var fd = new FormData($('form')[0])
+  let fd = new FormData($('form')[0])
   $.ajax({
     url: form.action,
     type: ($("input[name='_method']").val() || form.method),
