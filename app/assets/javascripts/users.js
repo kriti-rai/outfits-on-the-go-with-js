@@ -74,10 +74,10 @@ function attachListenersForUsers() {
   })
 };
 
-////////////////////////////HELPER FUNCTIONS///////////////////////////
+////////////////////////////HANDLERS//////////////////////////
 
 var createUpdateUser = (form) => {
-  var fd = new FormData($('form')[0])
+  let fd = new FormData($('form')[0])
   $.ajax({
     url: form.action,
     type: ($("input[name='_method']").val() || form.method),
@@ -159,12 +159,12 @@ var showUser = (url) => {
 };
 
 var showFeed = (url) => {
-    clear();
-    $('.col-lg-12').append('<br><br><h1 class-"display-1">Feed</h1><hr>');
-    $.getJSON(url, function(boards) {
-      boards.forEach((b) => {
-        let board = new Board(b)
-        $('.col-lg-12').append(`<p><a href="#" class="feed-user" onclick='showUser("/users/${board.user_id}")'>${board.user.username}</a> created <a href="#" class="feed-board" onclick='viewBoard("/boards/${board.id}")'>${board.name}</a> on ${board.created_at}</p>`)
-      })
+  clear();
+  $('.col-lg-12').append('<br><br><h1 class-"display-1">Feed</h1><hr>');
+  $.getJSON(url, function(boards) {
+    boards.forEach((b) => {
+      let board = new Board(b)
+      $('.col-lg-12').append(`<p><a href="#" class="feed-user" onclick='showUser("/users/${board.user_id}")'>${board.user.username}</a> created <a href="#" class="feed-board" onclick='viewBoard("/boards/${board.id}")'>${board.name}</a> on ${board.created_at}</p>`)
     })
+  })
 };
