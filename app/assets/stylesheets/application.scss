@@ -24,13 +24,19 @@
   color: grey;
 }
 
-.bio, .empty-msg {
-  font-size: 18px;
+.bio, .empty-msg, .caption, .hashtags {
+  font-size: 20px;
   font-family: "Abel", "sans-serif";
   color: grey;
 }
 
-.page-user {
+#board-button {
+  font-size: 25px;
+  font-family: "Abel", "sans-serif";
+  color: grey;
+}
+
+.page-user, .page-header {
   font-weight: bold;
   font-size: 90px;
   white-space: nowrap;
