@@ -125,9 +125,9 @@ var listBoards = (uid,url) => {
         });
       } else {
         if (uid === currentUID) {
-          $('.col-lg-12').append(`<div class="empty-msg">This board is currently empty</div> <br><button type="button" data-url="/users/${currentUID}/boards/new" id="create-board" class="btn btn-outline-secondary">Create Board</button>`)
+          $('.col-lg-12').append(`<div class="empty-msg">You currently have no boards.</div> <br><button type="button" data-url="/users/${currentUID}/boards/new" id="create-board" class="btn btn-outline-secondary">Create Board</button>`)
         } else {
-          $('.col-lg-12').append(`<div class="empty-msg">This board is currently empty</div>`)
+          $('.col-lg-12').append(`<div class="empty-msg">This user currently has no boards.</div>`)
         };
       };
     });
