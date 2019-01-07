@@ -115,7 +115,7 @@ var listBoards = (uid,url) => {
       clear();
       if (boards.length) {
         if (uid === currentUID) {
-          $('.col-lg-12').append(`<h1> Your Boards <button type="button" data-url="/users/${currentUID}/boards/new" id="create-board" class="btn btn-outline-secondary">+ Create Board</button></h1>`)
+          $('.col-lg-12').append(`<h1> My Boards <button type="button" data-url="/users/${currentUID}/boards/new" id="create-board" class="btn btn-outline-secondary">+ Create Board</button></h1>`)
         } else {
           $('.col-lg-12').append(`<h1>${user.username}'s Boards</h1>`)
         }

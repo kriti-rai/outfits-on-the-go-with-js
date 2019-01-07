@@ -6,14 +6,16 @@
 
 
 .static h1 {
-  font-size: 65px;
+  font-size: 85px;
   font-weight: 900;
-  color: #FCF3CF;
   white-space: nowrap;
   display: inline-block;
   position: relative;
   letter-spacing: .1em;
   padding: .2em 0 .25em 0;
+  background: -webkit-linear-gradient(#80ced6, #f4e1d2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .static p {
@@ -32,7 +34,7 @@
   font-weight: bold;
   font-size: 90px;
   white-space: nowrap;
-  color: #FCF3CF;
+  color: #80ced6;
   font-family: "Abel", "sans-serif";
 }
 
@@ -124,7 +126,6 @@ h1 {
 
 hr {
     display: block;
-    height: 1px;
     border: 0;
     border-top: 1px solid #ccc;
     margin: 1em 0;
