@@ -68,6 +68,11 @@ function attachListenersForOutfits () {
       e.preventDefault();
       deleteOutfit(this)
      });
+
+     $('body').on('click', '#cancel-create-outfit', function (e) {
+       e.preventDefault();
+       viewBoard(this.href)
+      });
 }
 
 /////////////////////////HANDLERS////////////////////////////
