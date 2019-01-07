@@ -72,7 +72,7 @@ function attachListenersForBoards() {
     //render edit form
     $('body').on('click', '#edit-board', function (e) {
       e.preventDefault();
-      renderForm(this);
+      renderForm(this.dataset.url)
     });
 
     //edit board
@@ -134,8 +134,8 @@ var listBoards = (uid,url) => {
   });
 };
 
-var renderForm = (form) => {
-  $.get(`${form.dataset.url}`, function(form) {
+var renderForm = (url) => {
+  $.get(url, function(form) {
     clear();
     $('.col-lg-12').append(form)
   });
