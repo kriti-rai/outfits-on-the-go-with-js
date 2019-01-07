@@ -41,7 +41,7 @@ function attachListenersForOutfits () {
     //render create form
    $('body').on('click', '#create-outfit', function (e) {
      e.preventDefault();
-     renderForm(this);
+     renderForm(this.dataset.url);
    });
 
    // create outfit
