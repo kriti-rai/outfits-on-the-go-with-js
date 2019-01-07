@@ -6,6 +6,7 @@ class OutfitsController < ApplicationController
 
   def new
     @outfit = Outfit.new(user: current_user, board: Board.find(params[:board_id]))
+    @board = Board.find(params[:board_id])
     render layout: false
   end
 
