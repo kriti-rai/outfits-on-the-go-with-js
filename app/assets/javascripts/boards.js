@@ -16,15 +16,14 @@ class Board {
   createBoardLinks() {
     let innerHTML = "<br><h4>"
     let currentUserBoardsHTML = `
-        <a href="/boards/${this.id}" class="board">${this.name}</a>
-        <button type="button" data-url="/boards/${this.id}" id="view-board" class="btn btn-info btn-sm">View</button>
-        <button type="button" data-url="/boards/${this.id}/edit" id="edit-board" class="btn btn-primary btn-sm">Edit</button>
-        <button type="button" data-url="/boards/${this.id}" id="delete-board" class="btn btn-danger btn-sm">Delete</button>
-      </h4>
+        <a href="/boards/${this.id}" id="board-button" class="board">${this.name}</a>
+          <button type="button" data-url="/boards/${this.id}" id="view-board" class="btn btn-outline-info">View</button>
+          <button type="button" data-url="/boards/${this.id}/edit" id="edit-board" class="btn btn-outline-primary">Edit</button>
+          <button type="button" data-url="/boards/${this.id}" id="delete-board" class="btn btn-outline-danger">Delete</button></h4>
       `
     let userBoardsHTML = `
-        <a href="/boards/${this.id}" class="board">${this.name}</a>
-        <button type="button" data-url="/boards/${this.id}" id="view-board" class="btn btn-info btn-sm">View</button>
+        <a href="/boards/${this.id}" id="board-button" class="board">${this.name}</a>
+        <button type="button" data-url="/boards/${this.id}" id="view-board" class="btn btn-outline-info">View</button>
       </h4>
       `
     if (this.user_id === currentUID) {
@@ -115,7 +114,7 @@ var listBoards = (uid,url) => {
       clear();
       if (boards.length) {
         if (uid === currentUID) {
-          $('.col-lg-12').append(`<h1> My Boards <button type="button" data-url="/users/${currentUID}/boards/new" id="create-board" class="btn btn-outline-secondary">+ Create Board</button></h1>`)
+          $('.col-lg-12').append(`<p class="page-header"> My Boards</p><button type="button" data-url="/users/${currentUID}/boards/new" id="create-board" class="btn btn-outline-secondary">+ Create Board</button><br><br>`)
         } else {
           $('.col-lg-12').append(`<h1>${user.username}'s Boards</h1>`)
         }
