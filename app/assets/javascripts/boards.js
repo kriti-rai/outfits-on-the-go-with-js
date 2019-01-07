@@ -102,7 +102,7 @@ function viewBoard (url) {
     $('.col-lg-12').prepend(`<span class="display-2">${board.name}</span><br><br><button type="button" data-url="/users/${board.user.id}/boards" id="back-boards" onclick="listBoards(${board.user.id}, this.dataset.url)" class="btn btn-outline-secondary">Back</button> `);
     let user = board.user;
     if (user.id === currentUID) {
-      $('.col-lg-12').append(`<button type="button" data-url="/boards/${board.id}/outfits/new" id="create-outfit" class="btn btn-outline-secondary">Add Outfit</button></span> `)
+      $('.col-lg-12').append(`<button type="button" data-url="/boards/${board.id}/outfits/new" id="create-outfit" class="btn btn-outline-secondary">Add Outfit</button> `)
     }
    listOutfits(board.outfits);
    });
