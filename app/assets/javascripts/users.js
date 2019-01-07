@@ -140,16 +140,16 @@ var showNextUser = (user) => {
 };
 
 var userHTML = (user) => {
+  $('.col-lg-12').append($(`<br><p class="page-user">${user.username}</p>`))
+
   if (user.image.url != null) {
     $('.col-lg-12').append($('<img>', {class:'user-show', src:`${user.image.url}`}))
   } else {
     $('.col-lg-12').append($('<img>', {class:'user-show', src:"/assets/no_image.png"}))
   }
-  $('.col-lg-12').append($(`<br><h1>${user.username}!</h1>`))
-
-  user.image != null ? $('.col-lg-12').append(`<h6><em><font color= 'grey'>Bio: ${user.bio}</em></h6>`) : false
-let url = "/users/${user.id}/boards"
-  $('.col-lg-12').append(`<p><button data-url="/users/${user.id}/boards" data-username="${user.username}" class="button" id="boards" onclick="listBoards(${user.id},this.dataset.url)">Boards</button></p>`)
+  user.bio != null ? $('.col-lg-12').append(`<br><br><div class="bio">Bio: ${user.bio}</div>`) : false
+  let url = "/users/${user.id}/boards"
+  $('.col-lg-12').append(`<br><br><button data-url="/users/${user.id}/boards" data-username="${user.username}" class="btn btn-outline-secondary" id="boards" onclick="listBoards(${user.id},this.dataset.url)">Boards</button>`)
 }
 
 
