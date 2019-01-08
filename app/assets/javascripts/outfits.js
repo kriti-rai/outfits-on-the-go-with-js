@@ -66,8 +66,12 @@ function attachListenersForOutfits () {
    //  delete outfit
     $('body').on('click', '#del-outfit', function (e) {
       e.preventDefault();
-      deleteOutfit(this)
-     });
+      let dialogue = confirm("Are you sure you want to delete this post?")
+      if (dialogue) {
+        deleteOutfit(this);
+      };
+      return false;
+    });
 
      $('body').on('click', '#cancel-create-outfit', function (e) {
        e.preventDefault();

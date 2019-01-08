@@ -83,8 +83,12 @@ function attachListenersForBoards() {
     //delete board
     $('body').on('click', '#delete-board', function (e) {
       e.preventDefault();
-      deleteBoard(this)
-     });
+      let dialogue = confirm("Are you sure you want to delete the board?")
+      if (dialogue) {
+        deleteBoard(this);
+      };
+      return false;
+    });
 
      //cancel edit
      $('body').on('click', '.cancel-edit-board', function (e) {
