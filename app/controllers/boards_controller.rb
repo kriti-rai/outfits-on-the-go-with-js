@@ -38,10 +38,7 @@ class BoardsController < ApplicationController
 
   def feed
     @boards = Board.newest_to_oldest
-    respond_to do |format|
-      format.html { render :feed }
-      format.json { render json: @boards }
-    end
+    render json: @boards
   end
 
   def show
