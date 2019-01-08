@@ -87,10 +87,9 @@ var updateUser = (form) => {
     processData: false,
     success: function(resp) {
       showCurrentUser(resp);
-      $('.col-lg-12').prepend('<div class="alert-success">Update Successful<br><br>')
-
+      $('.col-lg-12').prepend('<div class="alert-success">Update Successful')
     }
-    });
+  });
 };
 
 var deleteAction = (data) => {
