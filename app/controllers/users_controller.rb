@@ -34,7 +34,6 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash[:success] = "Update successful"
       render json: @user
     end
   end
