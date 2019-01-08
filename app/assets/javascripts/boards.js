@@ -181,6 +181,7 @@ var editBoard = (data) => {
       clear();
       let board = new Board(response);
       clear();
+      $('.col-lg-12').prepend('<div class="alert-success">Update Successful')
       $('.col-lg-12').append(`<h1>${board.name}</h1>`)
       if (board.outfits.length) {
         listOutfits(board.outfits);
