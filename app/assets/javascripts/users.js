@@ -41,7 +41,7 @@ function attachListenersForUsers() {
   // edit Account
   $('body').on('submit', '.edit_user', function (e) {
     e.preventDefault();
-    createUpdateUser(this)
+    updateUser(this)
   });
 
   //delete account
@@ -76,7 +76,7 @@ function attachListenersForUsers() {
 
 ////////////////////////////HANDLERS//////////////////////////
 
-var createUpdateUser = (form) => {
+var updateUser = (form) => {
   let fd = new FormData($('form')[0])
   $.ajax({
     url: form.action,
@@ -86,8 +86,9 @@ var createUpdateUser = (form) => {
     contentType: false,
     processData: false,
     success: function(resp) {
-      clear();
       showCurrentUser(resp);
+      $('.col-lg-12').prepend('<div class="alert-success">Update Successful<br><br>')
+
     }
     });
 };
