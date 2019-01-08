@@ -57,14 +57,6 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <br>
-        <% if flash[:error] %>
-          <div class="alert-danger"> <%= flash[:error] %> </div>
-        <% end %><br />
-        <% if flash[:success] %>
-          <div class="alert-success"> <%= flash[:success] %> </div>
-        <% end %>
-        <br>
-        <br>
         <%= yield %>
         <br>
         <br>
