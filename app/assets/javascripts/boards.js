@@ -77,7 +77,7 @@ function attachListenersForBoards() {
     //edit board
     $('body').on('submit', '.edit_board', function (e) {
       e.preventDefault();
-      editBoard(this);
+      updateBoard(this);
      });
 
     //delete board
@@ -172,7 +172,7 @@ var deleteBoard = (board) => {
   });
 };
 
-var editBoard = (data) => {
+var updateBoard = (data) => {
   $.ajax({
     url: data.action,
     type: "PATCH",
