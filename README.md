@@ -8,11 +8,6 @@
 
 Outfits On The Go is a Rails and JavaScript application that works like a planner for outfits. Upon logging in with username and password or via Facebook, the user gets to create boards where they can add outfits (with caption and hashtags) they plan to wear for specific occasions.  They will also be able to view other users' boards as well as look up outfits by hashtag. The purpose of this app is to save time (and headache) when it comes to planning an outfit and prevent one from over- or under-packing if going away on a trip.
 
-<p align="center">
-  <img width="500" height="300" alt-text="home_page" src="https://media.giphy.com/media/i3ofY7z8yX9WcbdL7F/giphy.gif">
-</p>
-
-
 ## Installation:
 
 - If you don't have Rails, install by running `$ gem install rails`
